@@ -1,24 +1,27 @@
 .react-modal{
   font-family: -apple-system,SF UI Text,Helvetica Neue,Helvetica,Arial,sans-serif;
   width: 80%;
+  top:38.2%;
   left:50%;
   position: absolute;
   z-index:2;
-  transform: translate(-50%,-50%);
-  transition: opacity 0.3s linear,top 0.35s cubic-bezier(0.42, 0, 0.58, 1.0);
+  transform: translate(-50%,-50%) scale(1.185);
+  transition: transform 0.3s ease-in-out,opacity 0.3s linear;
 
   &[hidden]{
     display: block;
   }
-
   &[data-visible=false]{
-    top:43%;
     opacity: 0;
+    transform: translate(-50%,-50%) scale(1.085);
   }
 
-  &[data-visible=true]{
-    top:38.2%;
+  &[data-visible=true][data-animating=true]{
     opacity: 1;
+    transform: translate(-50%,-50%) scale(1);
+  }
+  &[data-visible=true][data-animating=false]{
+    transform: translate(-50%,-50%) scale(1);
   }
 
   >*{

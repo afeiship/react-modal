@@ -84,6 +84,7 @@ class ReactModal extends React.Component{
     return (
       <div
         data-visible={this.state.visible}
+        data-animating={this.state.animating}
         hidden={!this.state.visible && !this.state.animating}
         onTransitionEnd={this._onTransitionEnd.bind(this)}
         className={classNames('react-modal',this.props.cssClass)}>
