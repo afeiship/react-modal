@@ -10,8 +10,26 @@ class App extends React.Component{
   _click(){
     ReactModalCtrl.show({
       header:'React Modal',
-      body:'Are you feel good today?'
+      body:'Are you feel good today?',
+      buttons:[{
+        text:'option1',
+        onClick:this._option1.bind(this)
+      },{
+        text:'option2',
+        onClick:function(item){
+          console.log('option2',item);
+        }
+      },{
+        text:'CLOSE',
+        onClick:function(item){
+          ReactModalCtrl.hide();
+        }
+      }]
     });
+  }
+
+  _option1(){
+    console.log('option1 action!!!');
   }
 
   render(){

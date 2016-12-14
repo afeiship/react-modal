@@ -13,6 +13,9 @@ class ReactModal extends React.Component{
 
   static defaultProps = {
     type:'default',
+    header:'Title',
+    body:'',
+    visible:false,
     buttons:[{
       text:'OK',
       onClick:function(item){
@@ -35,9 +38,10 @@ class ReactModal extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      header:'Title',
-      body:'',
-      visible:false,
+      header:props.header,
+      body:props.body,
+      visible:props.visible,
+      buttons:props.buttons,
       animating:false
     };
   }
@@ -86,7 +90,7 @@ class ReactModal extends React.Component{
         {this.state.header && <div className="react-modal-hd" dangerouslySetInnerHTML={{__html: this.state.header}}></div>}
         {this.state.body && <div className="react-modal-bd" dangerouslySetInnerHTML={{__html: this.state.body}}></div>}
         <div className="react-modal-ft">
-          {this.props.buttons.map(function(item,index){
+          {this.state.buttons.map(function(item,index){
             return <div key={index} className="react-modal-button" onClick={item.onClick.bind(this)}>{item.text}</div>
           }.bind(this))}
         </div>
