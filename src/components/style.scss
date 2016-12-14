@@ -7,16 +7,18 @@
   transform: translate(-50%,-50%);
   transition: opacity 0.3s linear,top 0.35s cubic-bezier(0.42, 0, 0.58, 1.0);
 
+  &[hidden]{
+    display: block;
+  }
+
   &[data-visible=false]{
     top:43%;
     opacity: 0;
-    z-index:-1;
   }
 
   &[data-visible=true]{
     top:38.2%;
     opacity: 1;
-    z-index:2;
   }
 
   >*{

@@ -2,7 +2,6 @@ import './style.scss';
 import classNames from 'classnames';
 import {Backdrop,BackdropCtrl} from 'react-backdrop';
 import appendToDocument from 'react-append-to-document';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 
 class ReactModal extends React.Component{
@@ -38,39 +37,51 @@ class ReactModal extends React.Component{
     this.state = {
       header:'Title',
       body:'',
-      visible:false
+      visible:false,
+      animating:false
     };
   }
 
 
   componentWillMount(){
-    BackdropCtrl.getInstance({
-      style:{
-        opacity:0.4
-      }
-    });
+    BackdropCtrl.getInstance();
   }
 
   show(inOptions){
-    this.setState(
-      Object.assign(inOptions,{
-        visible:true
-      })
-    );
-    BackdropCtrl.show();
+    this._setVisible(inOptions,true);
   }
 
   hide(){
+    this._setVisible({},false);
+  }
+
+  _setVisible(inOptions,inValue){
+    var self = this;
     this.setState({
-      visible:false
+      animating:true
     });
-    BackdropCtrl.hide();
+    setTimeout(function(){
+      self.setState(
+        Object.assign(inOptions,{
+          visible:inValue
+        })
+      );
+      inValue ? BackdropCtrl.show() : BackdropCtrl.hide();
+    });
+  }
+
+  _onTransitionEnd(){
+    this.setState({
+      animating:false
+    });
   }
 
   render(){
     return (
       <div
         data-visible={this.state.visible}
+        hidden={!this.state.visible && !this.state.animating}
+        onTransitionEnd={this._onTransitionEnd.bind(this)}
         className={classNames('react-modal',this.props.cssClass)}>
         {this.state.header && <div className="react-modal-hd" dangerouslySetInnerHTML={{__html: this.state.header}}></div>}
         {this.state.body && <div className="react-modal-bd" dangerouslySetInnerHTML={{__html: this.state.body}}></div>}
