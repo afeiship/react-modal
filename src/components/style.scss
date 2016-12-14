@@ -1,0 +1,81 @@
+.react-modal{
+  font-family: -apple-system,SF UI Text,Helvetica Neue,Helvetica,Arial,sans-serif;
+  &-wrapper{
+    width: 80%;
+    top:38.2%;
+    left:50%;
+    position: absolute;
+    z-index:2;
+    transform: translate(-50%,-50%);
+    transition: opacity 0.3s linear,z-index 0.4s linear;
+  }
+
+  &[data-visible=false]{
+    opacity: 0;
+    z-index:-1;
+  }
+
+  &[data-visible=true]{
+    opacity: 1;
+    z-index:1;
+  }
+
+  >*{
+    background: rgba(#FFF,.95);
+  }
+  &-hd{
+    padding:15px;
+    font-weight: 500;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 13px 13px 0 0;
+  }
+  &-bd{
+    text-align: center;
+    padding:15px;
+    border:1px solid #eee;
+    border-width: 1px 0;
+  }
+  &-ft{
+    border-radius: 0 0 13px 13px;
+    height: 44px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  &-button{
+    + .react-modal-button{
+      border-left: 1px solid #eee;
+    }
+
+    &:active{
+      background: #eee;
+    }
+
+    &:first-child{
+      border-radius: 0 0 0 13px;
+    }
+    &:last-child{
+      border-radius: 0 0 13px 0;
+    }
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    width: 100%;
+    padding: 0 5px;
+    height: 44px;
+    font-size: 17px;
+    line-height: 44px;
+    text-align: center;
+    color: #007aff;
+    display: block;
+    position: relative;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    cursor: pointer;
+    box-sizing: border-box;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+  }
+}
