@@ -2,7 +2,7 @@ import './style.scss';
 import classNames from 'classnames';
 import {Backdrop,BackdropCtrl} from 'react-backdrop';
 import appendToDocument from 'react-append-to-document';
-
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 
 class ReactModal extends React.Component{
@@ -45,7 +45,9 @@ class ReactModal extends React.Component{
 
   componentWillMount(){
     BackdropCtrl.getInstance({
-      opacity:0.4
+      style:{
+        opacity:0.4
+      }
     });
   }
 

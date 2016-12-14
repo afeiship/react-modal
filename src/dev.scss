@@ -1,3 +1,8 @@
+*{margin: 0;padding: 0;}
+html,body{
+  height:100%;
+  position: relative;
+}
 .hello-react-modal{
   color:#F00;
 
@@ -5,12 +10,14 @@
     box-sizing: border-box;;
     display: block;
     width:100%;
-    background: #666;
+    border: none;
+    border-radius: 10px;
+    background: #3cc51f;
     color:#fff;
     padding:20px;
 
     &:active{
-      background: #333;
+      background: #3cc51f;
     }
 
     &:focus{
