@@ -1,3 +1,36 @@
+.hairline{
+  position: relative;
+  &:after{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: auto;
+    right: auto;
+    background-color: #c8c7cc;
+    display: block;
+    z-index: 15;
+  }
+}
+.hairline-x{
+  @extend .hairline;
+  &:after{
+    height: 1px;
+    width: 100%;
+    transform-origin: 50% 0;
+    transform: scaleY(.5);
+  }
+}
+
+.hairline-y{
+  @extend .hairline;
+  &:after{
+    width: 1px;
+    height: 100%;
+    transform-origin: 0 50%;
+    transform: scaleX(.5);
+  }
+}
 .react-modal{
   font-family: -apple-system,SF UI Text,Helvetica Neue,Helvetica,Arial,sans-serif;
   width: 80%;
@@ -43,29 +76,34 @@
   }
   &-hd{
     padding:15px;
-    font-weight: 500;
     font-size: 18px;
     text-align: center;
     border-radius: 13px 13px 0 0;
     font-weight: bold;
-    border-bottom: 1px solid #dedede;
   }
   &-bd{
     text-align: center;
     padding:15px;
   }
   &-ft{
-    border-top: 1px solid #dedede;
+    // border-top: 1px solid #dedede;
+    @extend .hairline-x;
+    &:after{
+      top:0;
+    }
     border-radius: 0 0 13px 13px;
     height: 44px;
-    position: relative;
     display: flex;
     justify-content: center;
   }
 
   &-button{
     + .react-modal-button{
-      border-left: 1px solid #dedede;
+      position: relative;
+      @extend .hairline-y;
+      &:after{
+        left:0;
+      }
     }
 
     &:active{
