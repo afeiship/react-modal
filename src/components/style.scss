@@ -24,6 +24,20 @@
     transform: translate(-50%,-50%) scale(1);
   }
 
+  &.no-header{
+    .react-modal-bd{
+      border-top-left-radius: 13px;
+      border-top-right-radius: 13px;
+    }
+  }
+
+  &.no-footer{
+    .react-modal-bd{
+      border-bottom-left-radius: 13px;
+      border-bottom-right-radius: 13px;
+    }
+  }
+
   >*{
     background: rgba(#FFF,.95);
   }
@@ -33,14 +47,14 @@
     font-size: 18px;
     text-align: center;
     border-radius: 13px 13px 0 0;
+    border-bottom: 1px solid #eee;
   }
   &-bd{
     text-align: center;
     padding:15px;
-    border:1px solid #eee;
-    border-width: 1px 0;
   }
   &-ft{
+    border-top: 1px solid #eee;
     border-radius: 0 0 13px 13px;
     height: 44px;
     position: relative;

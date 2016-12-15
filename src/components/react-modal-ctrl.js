@@ -7,9 +7,11 @@ export default class ReactModalCtrl {
     instance = instance || ReactModal.newInstance(inProps);
     return instance;
   }
+
   static show(inOptions){
     instance.component.show(inOptions);
   }
+
   static hide(){
     instance.component.hide();
   }
