@@ -1829,6 +1829,10 @@ get-caller-file@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-1.0.2.tgz#f702e63127e7e231c160a80c1554acb70d5047e5"
 
+get-node-dimensions@^1.2.0:
+  version "1.2.2"
+  resolved "http://registry.npm.taobao.org/get-node-dimensions/download/get-node-dimensions-1.2.2.tgz#7a71e8624cf9e1ab74599bb05b7e5116e995e45b"
+
 get-stdin@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/get-stdin/-/get-stdin-4.0.1.tgz#b968c6b0a04384324902e8bf1a5df32579a450fe"
@@ -3530,6 +3534,19 @@ rc@~1.1.6:
     minimist "^1.2.0"
     strip-json-comments "~1.0.4"
 
+"react-append-to-document@github:afeiship/react-append-to-document":
+  version "1.0.0"
+  resolved "https://codeload.github.com/afeiship/react-append-to-document/tar.gz/a9c4b841fc93f6585ec3eec9b7dfb878d4aee051"
+
+"react-backdrop@github:afeiship/react-backdrop":
+  version "0.1.0"
+  resolved "https://codeload.github.com/afeiship/react-backdrop/tar.gz/b77a7455605fc11a731c4b56cef87e9441d9dbfa"
+  dependencies:
+    classnames "^2.2.5"
+    react "^15.4.1"
+    react-append-to-document "github:afeiship/react-append-to-document"
+    react-dom "^15.4.1"
+
 react-deep-force-update@^2.0.1:
   version "2.0.1"
   resolved "http://registry.npm.taobao.org/react-deep-force-update/download/react-deep-force-update-2.0.1.tgz#4f7f6c12c3e7de42f345992a3c518236fa1ecad3"
@@ -3552,6 +3569,13 @@ react-hot-loader@^3.0.0-beta.6:
     react-proxy "^3.0.0-alpha.0"
     redbox-react "^1.2.5"
     source-map "^0.4.4"
+
+react-measure@^1.4.4:
+  version "1.4.4"
+  resolved "http://registry.npm.taobao.org/react-measure/download/react-measure-1.4.4.tgz#88b9f5321f515d0bb9e87e91a327dd41a9cf1d90"
+  dependencies:
+    get-node-dimensions "^1.2.0"
+    resize-observer-polyfill "^1.2.1"
 
 react-proxy@^3.0.0-alpha.0:
   version "3.0.0-alpha.1"
@@ -3806,6 +3830,10 @@ require-main-filename@^1.0.1:
 requires-port@1.x.x:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
+
+resize-observer-polyfill@^1.2.1:
+  version "1.2.1"
+  resolved "http://registry.npm.taobao.org/resize-observer-polyfill/download/resize-observer-polyfill-1.2.1.tgz#55a4ff3e4f212a76470835fb7590dbb62a3e6542"
 
 resolve@1.1.x, resolve@^1.1.6:
   version "1.1.7"

@@ -2,6 +2,7 @@ import './style.scss';
 import classNames from 'classnames';
 import {BackdropCtrl} from 'react-backdrop';
 import appendToDocument from 'react-append-to-document';
+import Measure from 'react-measure';
 
 
 class ReactModal extends React.Component{
@@ -46,6 +47,8 @@ class ReactModal extends React.Component{
     this.state = {
       header:props.header,
       body:props.body,
+      dimensions:{},
+      shouldMeasure:true,
       visible:props.visible,
       buttons:props.buttons,
       animating:false
@@ -88,11 +91,25 @@ class ReactModal extends React.Component{
 
   render(){
     return (
+      <Measure
+        whitelist={['width','height']}
+        shouldMeasure={this.state.shouldMeasure}
+        onMeasure={(dimensions) => {
+            this.setState({
+              dimensions:dimensions,
+              shouldMeasure:false
+            })
+          }}>
       <div
         data-visible={this.state.visible}
         data-animating={this.state.animating}
         hidden={!this.state.visible && !this.state.animating}
         onTransitionEnd={this._onTransitionEnd.bind(this)}
+        data-height={this.state.dimensions.height}
+        style={{
+          marginTop:`-${this.state.dimensions.height/2}px`,
+          marginLeft:`-${this.state.dimensions.width/2}px`
+        }}
         className={classNames('react-modal',this.props.cssClass,{'no-header':!this.state.header},{'no-footer':this.state.buttons.length==0})}>
         {typeof(this.state.header)=='string' && <div className="react-modal-hd" dangerouslySetInnerHTML={{__html: this.state.header}}></div>}
         {typeof(this.state.header)=='object' && <div className="react-modal-hd">{this.state.header}</div>}
@@ -106,6 +123,7 @@ class ReactModal extends React.Component{
           }.bind(this))}
         </div>}
       </div>
+    </Measure>
     );
   }
 }

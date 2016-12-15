@@ -2,12 +2,15 @@ import './dev.scss';
 import {ReactModal,ReactModalCtrl} from './main';
 
 class Body extends React.Component{
+  _click(){
+    ReactModalCtrl.hide();
+  }
   render(){
     return (
       <div className="cus-body">
         <p><span className="bd">Hi Man!</span></p>
         <p>I am from <strong className="bd">Baidu</strong></p>
-        <p><img src="http://www.baidu.com/img/bd_logo1.png" width="270" height="129" /></p>
+        <p><img onClick={this._click.bind(this)} src="http://www.baidu.com/img/bd_logo1.png" /></p>
       </div>
     );
   }
@@ -16,32 +19,36 @@ class Body extends React.Component{
 
 class App extends React.Component{
   componentDidMount(){
+    console.log('will / did..');
     ReactModalCtrl.createInstance();
   }
 
-  _click(){
+  _click1(){
     ReactModalCtrl.show({
       header:'Customize <b style="color:#F00">Modal</b>',
       body:'Are you feel <b>good</b> today?',
-      buttons:[{
-        text:'option1',
-        onClick:this._option1.bind(this)
-      },{
-        text:'option2',
-        onClick:function(item){
-          console.log('option2',item);
+      buttons:[
+        {
+          text: 'option1',
+          onClick: function() {}
+        }, {
+          text: 'option2',
+          onClick: function(item) {
+            console.log('option2', item);
+          }
+        }, {
+          text: 'CLOSE',
+          onClick: function(item) {
+            ReactModalCtrl.hide();
+          }
         }
-      },{
-        text:'CLOSE',
-        onClick:function(item){
-          ReactModalCtrl.hide();
-        }
-      }]
+      ]
     });
   }
 
 
   _click2(){
+    console.log('click2....');
     ReactModalCtrl.show({
       header:'<b>Title</b><span style="color:#F00">With Color</span>',
       body:<Body />,
@@ -49,15 +56,26 @@ class App extends React.Component{
     });
   }
 
-  _option1(){
-    console.log('option1 action!!!');
+  _click3(){
+    console.log('click3....');
+    ReactModalCtrl.show({
+      header:'IOS Settings',
+      body:'Are you sure to change this one?',
+      buttons:[{
+        text:'OK',
+        onClick:function(item){
+          ReactModalCtrl.hide();
+        }
+      }]
+    });
   }
 
   render(){
     return (
       <div className="hello-react-modal">
-        <button onClick={this._click.bind(this)}>TEST MODAL</button>
+        <button onClick={this._click1.bind(this)}>TEST MODAL</button>
         <button onClick={this._click2.bind(this)}>TEST MODAL- Component body</button>
+        <button onClick={this._click3.bind(this)}>IOS Alert</button>
       </div>
     );
   }

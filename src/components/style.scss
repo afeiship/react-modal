@@ -5,23 +5,23 @@
   left:50%;
   position: absolute;
   z-index:2;
-  transform: translate(-50%,-50%) scale(1.185);
-  transition: transform 0.3s ease-in-out,opacity 0.3s linear;
+  transform: scale(1.185);
+  transition: transform 0.2s ease-in-out,opacity 0.22s linear;
 
   &[hidden]{
-    display: block;
+    display: none;
   }
   &[data-visible=false]{
     opacity: 0;
-    transform: translate(-50%,-50%) scale(1.085);
+    transform: scale(1.085);
   }
 
   &[data-visible=true][data-animating=true]{
     opacity: 1;
-    transform: translate(-50%,-50%) scale(1);
+    transform: scale(1);
   }
   &[data-visible=true][data-animating=false]{
-    transform: translate(-50%,-50%) scale(1);
+    transform: scale(1);
   }
 
   &.no-header{
@@ -47,14 +47,15 @@
     font-size: 18px;
     text-align: center;
     border-radius: 13px 13px 0 0;
-    border-bottom: 1px solid #eee;
+    font-weight: bold;
+    border-bottom: 1px solid #dedede;
   }
   &-bd{
     text-align: center;
     padding:15px;
   }
   &-ft{
-    border-top: 1px solid #eee;
+    border-top: 1px solid #dedede;
     border-radius: 0 0 13px 13px;
     height: 44px;
     position: relative;
@@ -64,19 +65,21 @@
 
   &-button{
     + .react-modal-button{
-      border-left: 1px solid #eee;
+      border-left: 1px solid #dedede;
     }
 
     &:active{
-      background: #eee;
+      background: #dedede;
     }
 
     &:first-child{
-      border-radius: 0 0 0 13px;
+      border-bottom-left-radius: 13px;
     }
+
     &:last-child{
-      border-radius: 0 0 13px 0;
+      border-bottom-right-radius: 13px;
     }
+
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     width: 100%;
