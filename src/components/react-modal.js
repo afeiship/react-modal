@@ -8,13 +8,11 @@ import Measure from 'react-measure';
 class ReactModal extends React.Component{
   static propTypes = {
     cssClass:React.PropTypes.string,
-    type:React.PropTypes.string,
     buttons:React.PropTypes.array,
     backdropOptions:React.PropTypes.object,
   };
 
   static defaultProps = {
-    type:'default',
     header:'Title',
     body:'',
     visible:false,
