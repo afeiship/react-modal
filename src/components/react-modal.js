@@ -10,11 +10,15 @@ class ReactModal extends React.Component{
     cssClass:React.PropTypes.string,
     buttons:React.PropTypes.array,
     backdropOptions:React.PropTypes.object,
+    body:React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.element,
+    ])
   };
 
   static defaultProps = {
     header:'Title',
-    body:'',
+    body:null,
     visible:false,
     backdropOptions:{
       style:{
