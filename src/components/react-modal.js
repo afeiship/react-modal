@@ -21,17 +21,7 @@ class ReactModal extends React.Component{
         opacity:0.7
       }
     },
-    buttons:[{
-      text:'OK',
-      onClick:function(item){
-        this.hide();
-      }
-    },{
-      text:'Cancel',
-      onClick:function(item){
-        this.hide();
-      }
-    }]
+    buttons:[]
   };
 
   static newInstance(inProps){
