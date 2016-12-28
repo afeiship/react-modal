@@ -40,8 +40,7 @@
   z-index:2;
   transform: scale(1.185);
   transition: transform 0.2s ease-in-out,opacity 0.22s linear;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
+
   user-select:none;
 
   &[hidden]{
@@ -120,7 +119,8 @@
     &:last-child{
       border-bottom-right-radius: 13px;
     }
-
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
     width: 100%;
     padding: 0 5px;
     height: 44px;

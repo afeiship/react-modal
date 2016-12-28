@@ -69,10 +69,12 @@ class ReactModal extends React.Component{
 
   _measureOnShow(inOptions,inValue){
     var self = this;
+    console.log(inOptions,inValue);
     self.setState(
       Object.assign(inOptions,{
         visible:inValue
       }),function(){
+        debugger;
         measureIt(self.refs.root,function(bound){
           self.setState({
             busy:false,
