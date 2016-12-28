@@ -1,9 +1,8 @@
 import './style.scss';
 import classNames from 'classnames';
-import {BackdropCtrl} from 'react-backdrop';
+import {ReactBackdropCtrl} from 'react-backdrop';
 import appendToDocument from 'react-append-to-document';
-import Measure from 'react-measure';
-
+import measureIt from 'measure-it';
 
 class ReactModal extends React.Component{
   static propTypes = {
@@ -17,10 +16,11 @@ class ReactModal extends React.Component{
   };
 
   static defaultProps = {
-    header:'Title',
+    header:null,
     body:null,
+    busy:false,
     visible:false,
-    backdropOptions:{
+    backdropOptions: {
       style:{
         opacity:0.7
       }
@@ -47,9 +47,8 @@ class ReactModal extends React.Component{
     };
   }
 
-
   componentWillMount(){
-    BackdropCtrl.getInstance(this.props.backdropOptions);
+    ReactBackdropCtrl.createInstance(this.props.backdropOptions);
   }
 
   show(inOptions){
@@ -61,18 +60,28 @@ class ReactModal extends React.Component{
   }
 
   _setVisible(inOptions,inValue){
-    var self = this;
     this.setState({
+      busy:true,
       animating:true
     });
-    setTimeout(function(){
-      self.setState(
-        Object.assign(inOptions,{
-          visible:inValue
-        })
-      );
-      inValue ? BackdropCtrl.show() : BackdropCtrl.hide();
-    });
+    setTimeout(this._measureOnShow.bind(this,inOptions,inValue));
+  }
+
+  _measureOnShow(inOptions,inValue){
+    var self = this;
+    self.setState(
+      Object.assign(inOptions,{
+        visible:inValue
+      }),function(){
+        measureIt(self.refs.root,function(bound){
+          self.setState({
+            busy:false,
+            dimensions:bound
+          });
+          inValue ? ReactBackdropCtrl.show() : ReactBackdropCtrl.hide();
+        });
+      }
+    );
   }
 
   _onTransitionEnd(){
@@ -83,16 +92,10 @@ class ReactModal extends React.Component{
 
   render(){
     return (
-      <Measure
-        whitelist={['width','height']}
-        shouldMeasure={this.state.shouldMeasure}
-        onMeasure={(dimensions) => {
-            this.setState({
-              dimensions:dimensions,
-              shouldMeasure:false
-            })
-          }}>
       <div
+        ref="root"
+        data-buzy={this.state.busy}
+        data-header={this.state.header}
         data-visible={this.state.visible}
         data-animating={this.state.animating}
         hidden={!this.state.visible && !this.state.animating}
@@ -103,11 +106,11 @@ class ReactModal extends React.Component{
           marginLeft:`-${this.state.dimensions.width/2}px`
         }}
         className={classNames('react-modal',this.props.cssClass,{'no-header':!this.state.header},{'no-footer':this.state.buttons.length==0})}>
-        {typeof(this.state.header)=='string' && <div className="react-modal-hd" dangerouslySetInnerHTML={{__html: this.state.header}}></div>}
-        {typeof(this.state.header)=='object' && <div className="react-modal-hd">{this.state.header}</div>}
+        {this.state.header && typeof(this.state.header)=='string' && <div className="react-modal-hd" dangerouslySetInnerHTML={{__html: this.state.header}}></div>}
+        {this.state.header && typeof(this.state.header)=='object' && <div className="react-modal-hd">{this.state.header}</div>}
 
-        {typeof(this.state.body)=='string' && <div className="react-modal-bd" dangerouslySetInnerHTML={{__html: this.state.body}}></div>}
-        {typeof(this.state.body)=='object' && <div className="react-modal-bd">{this.state.body}</div>}
+        {this.state.body && typeof(this.state.body)=='string' && <div className="react-modal-bd" dangerouslySetInnerHTML={{__html: this.state.body}}></div>}
+        {this.state.body && typeof(this.state.body)=='object' && <div className="react-modal-bd">{this.state.body}</div>}
 
         {this.state.buttons.length>0 && <div className="react-modal-ft">
           {this.state.buttons.map(function(item,index){
@@ -115,7 +118,6 @@ class ReactModal extends React.Component{
           }.bind(this))}
         </div>}
       </div>
-    </Measure>
     );
   }
 }

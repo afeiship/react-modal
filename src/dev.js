@@ -70,12 +70,26 @@ class App extends React.Component{
     });
   }
 
+  _click4(){
+    ReactModalCtrl.show({
+      header:null,
+      body:'NO header content.',
+      buttons:[{
+        text:'OK',
+        onClick:function(item){
+          ReactModalCtrl.hide();
+        }
+      }]
+    });
+  }
+
   render(){
     return (
       <div className="hello-react-modal">
         <button onClick={this._click1.bind(this)}>TEST MODAL</button>
         <button onClick={this._click2.bind(this)}>TEST MODAL- Component body</button>
         <button onClick={this._click3.bind(this)}>IOS Alert</button>
+        <button onClick={this._click4.bind(this)}>IOS Alert4</button>
       </div>
     );
   }
