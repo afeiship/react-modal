@@ -74,7 +74,6 @@ class ReactModal extends React.Component{
       Object.assign(inOptions,{
         visible:inValue
       }),function(){
-        debugger;
         measureIt(self.refs.root,function(bound){
           self.setState({
             busy:false,
