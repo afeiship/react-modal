@@ -64,12 +64,11 @@ class ReactModal extends React.Component{
       busy:true,
       animating:true
     });
-    setTimeout(this._measureOnShow.bind(this,inOptions,inValue));
+    this._timeout = setTimeout(this._measureOnShow.bind(this, inOptions, inValue));
   }
 
   _measureOnShow(inOptions,inValue){
     var self = this;
-    console.log(inOptions,inValue);
     self.setState(
       Object.assign(inOptions,{
         visible:inValue
@@ -80,9 +79,15 @@ class ReactModal extends React.Component{
             dimensions:bound
           });
           inValue ? ReactBackdropCtrl.show() : ReactBackdropCtrl.hide();
+          self._clearTimeout();
         });
       }
     );
+  }
+
+  _clearTimeout(){
+    clearTimeout(this._timeout);
+    this._timeout = null;
   }
 
   _onTransitionEnd(){
