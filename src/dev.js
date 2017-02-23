@@ -20,7 +20,12 @@ class Body extends React.Component{
 class App extends React.Component{
   componentDidMount(){
     console.log('will / did..');
-    ReactModalCtrl.createInstance();
+    ReactModalCtrl.createInstance({
+      backdropOptions:{
+        zIndex:11,
+        opacity:0.1
+      }
+    });
   }
 
   _click1(){
