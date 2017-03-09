@@ -19,4 +19,9 @@ export default class ReactModalCtrl {
   static hide(){
     instance.component.hide();
   }
+
+  static destory(){
+    instance.destory();
+    instance=null;
+  }
 }
