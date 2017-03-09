@@ -59,6 +59,38 @@
     transform: scale(1);
   }
 
+
+  &[data-theme=tranparent]{}
+  &[data-theme=ios]{
+    >*{
+      background: rgba(#FFF,.95);
+    }
+    .react-modal-ft{
+      // border-top: 1px solid #dedede;
+      @extend .hairline-x;
+      &:after{
+        top:0;
+      }
+      border-radius: 0 0 13px 13px;
+      height: 44px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .react-modal-button{
+      &:active{
+        background: #dedede;
+      }
+      + .react-modal-button{
+        position: relative;
+        @extend .hairline-y;
+        &:after{
+          left:0;
+        }
+      }
+    }
+  }
+
   &.no-header{
     .react-modal-bd{
       border-top-left-radius: 13px;
@@ -73,9 +105,6 @@
     }
   }
 
-  >*{
-    background: rgba(#FFF,.95);
-  }
   &-hd{
     padding:15px 15px 0;
     font-size: 18px;
@@ -87,12 +116,9 @@
     text-align: center;
     padding:15px;
   }
+
   &-ft{
     // border-top: 1px solid #dedede;
-    @extend .hairline-x;
-    &:after{
-      top:0;
-    }
     border-radius: 0 0 13px 13px;
     height: 44px;
     display: flex;
@@ -100,18 +126,6 @@
   }
 
   &-button{
-    + .react-modal-button{
-      position: relative;
-      @extend .hairline-y;
-      &:after{
-        left:0;
-      }
-    }
-
-    &:active{
-      background: #dedede;
-    }
-
     &:first-child{
       border-bottom-left-radius: 13px;
     }

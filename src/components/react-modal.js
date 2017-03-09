@@ -9,6 +9,7 @@ class ReactModal extends React.Component{
     cssClass:React.PropTypes.string,
     buttons:React.PropTypes.array,
     backdropOptions:React.PropTypes.object,
+    theme:React.PropTypes.oneOf(['ios','tranparent']),
     body:React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.element,
@@ -20,6 +21,7 @@ class ReactModal extends React.Component{
     body:null,
     busy:false,
     visible:false,
+    theme:'ios',
     backdropOptions: {
       style:{
         opacity:0.7
@@ -39,6 +41,7 @@ class ReactModal extends React.Component{
     this.state = {
       header:props.header,
       body:props.body,
+      theme:props.theme,
       dimensions:{},
       shouldMeasure:true,
       visible:props.visible,
@@ -70,9 +73,9 @@ class ReactModal extends React.Component{
   _measureOnShow(inOptions,inValue){
     var self = this;
     self.setState(
-      Object.assign(inOptions,{
+      Object.assign({},self.props,{
         visible:inValue
-      }),function(){
+      },inOptions),function(){
         measureIt(self.refs.root,function(bound){
           self.setState({
             busy:false,
@@ -101,6 +104,7 @@ class ReactModal extends React.Component{
       <div
         ref="root"
         data-buzy={this.state.busy}
+        data-theme={this.state.theme}
         data-header={this.state.header}
         data-visible={this.state.visible}
         data-animating={this.state.animating}

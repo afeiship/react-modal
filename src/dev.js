@@ -32,6 +32,7 @@ class App extends React.Component{
     ReactModalCtrl.show({
       header:'Customize <b style="color:#F00">Modal</b>',
       body:'Are you feel <b>good</b> today?',
+      theme:'ios',
       buttons:[
         {
           text: 'option1',
@@ -66,6 +67,7 @@ class App extends React.Component{
     ReactModalCtrl.show({
       header:'IOS Settings',
       body:'Are you sure to change this one?',
+      theme:'transparent',
       buttons:[{
         text:'OK',
         onClick:function(item){
