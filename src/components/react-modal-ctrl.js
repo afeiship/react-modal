@@ -8,10 +8,6 @@ export default class ReactModalCtrl {
     return instance;
   }
 
-  static getInstance(){
-    return instance;
-  }
-
   static show(inOptions){
     instance.component.show(inOptions);
   }

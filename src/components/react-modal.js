@@ -4,11 +4,11 @@ import {ReactBackdropCtrl} from 'react-backdrop';
 import appendToDocument from 'react-append-to-document';
 import measureIt from 'measure-it';
 
-class ReactModal extends React.Component{
+export default class ReactModal extends React.Component{
   static propTypes = {
     cssClass:React.PropTypes.string,
     buttons:React.PropTypes.array,
-    backdropOptions:React.PropTypes.object,
+    backdropStyle:React.PropTypes.object,
     theme:React.PropTypes.oneOf(['ios','tranparent']),
     body:React.PropTypes.oneOfType([
       React.PropTypes.string,
@@ -22,12 +22,12 @@ class ReactModal extends React.Component{
     busy:false,
     visible:false,
     theme:'ios',
-    backdropOptions: {
+    buttons:[],
+    backdropStyle:{
       style:{
         opacity:0.7
       }
-    },
-    buttons:[]
+    }
   };
 
   static newInstance(inProps){
@@ -48,10 +48,11 @@ class ReactModal extends React.Component{
       buttons:props.buttons,
       animating:false
     };
+    this._timer = null;
   }
 
   componentWillMount(){
-    ReactBackdropCtrl.createInstance(this.props.backdropOptions);
+    ReactBackdropCtrl.createInstance(this.props.backdropStyle);
   }
 
   show(inOptions){
@@ -67,7 +68,7 @@ class ReactModal extends React.Component{
       busy:true,
       animating:true
     });
-    this._timeout = setTimeout(this._measureOnShow.bind(this, inOptions, inValue));
+    this._timer = setTimeout(this._measureOnShow.bind(this, inOptions, inValue));
   }
 
   _measureOnShow(inOptions,inValue){
@@ -89,8 +90,8 @@ class ReactModal extends React.Component{
   }
 
   _clearTimeout(){
-    clearTimeout(this._timeout);
-    this._timeout = null;
+    clearTimeout(this._timer);
+    this._timer = null;
   }
 
   _onTransitionEnd(){
@@ -103,7 +104,7 @@ class ReactModal extends React.Component{
     return (
       <div
         ref="root"
-        data-buzy={this.state.busy}
+        data-busy={this.state.busy}
         data-theme={this.state.theme}
         data-header={this.state.header}
         data-visible={this.state.visible}
@@ -123,14 +124,11 @@ class ReactModal extends React.Component{
         {this.state.body && typeof(this.state.body)=='object' && <div className="react-modal-bd">{this.state.body}</div>}
 
         {this.state.buttons.length>0 && <div className="react-modal-ft">
-          {this.state.buttons.map(function(item,index){
+          {this.state.buttons.map((item,index)=>{
             return <div key={index} className="react-modal-button" onClick={item.onClick.bind(this)}>{item.text}</div>
-          }.bind(this))}
+          })}
         </div>}
       </div>
     );
   }
 }
-
-
-export default ReactModal;
