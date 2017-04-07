@@ -3,9 +3,8 @@
 
 
 ## size:
-+     react-modal.js  13.2 kB
-+ react-modal.js.map    66 kB
-
+ + 16K	react-modal.js
+ + 68K	react-modal.js.map
 
 ## resource:
 + http://www.cnblogs.com/Kummy/p/4966937.html

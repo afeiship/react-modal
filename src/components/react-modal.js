@@ -4,17 +4,23 @@ import React,{PropTypes,PureComponent} from 'react';
 import {ReactBackdropCtrl} from 'react-backdrop';
 import appendToDocument from 'react-append-to-document';
 import measureIt from 'measure-it';
+import ReactVisible from 'react-visible';
 
-export default class ReactModal extends React.Component{
+export default class ReactModal extends ReactVisible{
   static propTypes = {
     className:PropTypes.string,
-    buttons:PropTypes.array,
-    backdropStyle:PropTypes.object,
-    theme:PropTypes.oneOf(['ios','tranparent']),
+    header:PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.element,
+    ]),
     body:PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.element,
-    ])
+    ]),
+    visible:PropTypes.bool,
+    theme:PropTypes.oneOf(['ios','tranparent']),
+    buttons:PropTypes.array,
+    backdropStyle:PropTypes.object
   };
 
   static defaultProps = {
@@ -24,9 +30,7 @@ export default class ReactModal extends React.Component{
     theme:'ios',
     buttons:[],
     backdropStyle:{
-      style:{
-        opacity:0.7
-      }
+      opacity:0.6
     }
   };
 
@@ -45,6 +49,7 @@ export default class ReactModal extends React.Component{
       visible:props.visible,
       buttons:props.buttons,
       dimensions:{},
+      hidden:!props.visible,
       shouldMeasure:true,
       animating:false
     };
@@ -52,74 +57,53 @@ export default class ReactModal extends React.Component{
   }
 
   componentWillMount(){
-    ReactBackdropCtrl.createInstance(this.props.backdropStyle);
-  }
-
-  show(inOptions){
-    this._setVisible(inOptions,true);
-  }
-
-  hide(){
-    this._setVisible({},false);
-  }
-
-  _setVisible(inOptions,inValue){
-    this.setState({ animating:true });
-    this._timer = setTimeout(()=>{
-      this._measureOnShow(inOptions, inValue);
+    ReactBackdropCtrl.createInstance({
+      style:this.props.backdropStyle
     });
   }
 
-  _measureOnShow(inOptions,inValue){
-    var self = this;
-    self.setState(
-      Object.assign({},self.props,{
-        visible:inValue
-      },inOptions),function(){
-        measureIt(self.refs.root,function(dimensions){
-          self.setState({ dimensions });
-          inValue ? ReactBackdropCtrl.show() : ReactBackdropCtrl.hide();
-          self._clearTimeout();
+  show(inOptions,inCallback){
+    super.show(inCallback);
+    ReactBackdropCtrl.show()
+    this.setState(
+      Object.assign({},this.props,inOptions),()=>{
+        measureIt(this.refs.root,(dimensions) => {
+          this.setState({ dimensions });
         });
       }
     );
   }
 
-  _clearTimeout(){
-    clearTimeout(this._timer);
-    this._timer = null;
-  }
-
-  _onTransitionEnd(){
-    this.setState({
-      animating:false
-    });
+  hide(inCallback){
+    super.hide(inCallback);
+    ReactBackdropCtrl.hide();
   }
 
   render(){
+    const {visible,hidden,theme,animating,header,body,dimensions,buttons} = this.state;
     return (
       <div
         ref="root"
-        data-theme={this.state.theme}
-        data-header={this.state.header}
-        data-visible={this.state.visible}
-        data-animating={this.state.animating}
-        hidden={!this.state.visible && !this.state.animating}
-        onTransitionEnd={this._onTransitionEnd.bind(this)}
-        data-height={this.state.dimensions.height}
+        data-visible={visible}
+        hidden={hidden}
+        data-theme={theme}
+        data-animating={animating}
+        data-header={header}
+        data-height={dimensions.height}
+        onTransitionEnd={this._onTransitionEnd}
         style={{
-          marginTop:`-${this.state.dimensions.height/2}px`,
-          marginLeft:`-${this.state.dimensions.width/2}px`
+          marginTop:`-${dimensions.height/2}px`,
+          marginLeft:`-${dimensions.width/2}px`
         }}
-        className={classNames('react-modal',this.props.className,{'no-header':!this.state.header},{'no-footer':this.state.buttons.length==0})}>
-        {this.state.header && typeof(this.state.header)=='string' && <div className="react-modal-hd" dangerouslySetInnerHTML={{__html: this.state.header}}></div>}
-        {this.state.header && typeof(this.state.header)=='object' && <div className="react-modal-hd">{this.state.header}</div>}
+        className={classNames('react-modal',this.props.className,{'no-header':!header},{'no-footer':buttons.length==0})}>
+        {header && typeof(header)=='string' && <div className="react-modal-hd" dangerouslySetInnerHTML={{__html: header}}></div>}
+        {header && typeof(header)=='object' && <div className="react-modal-hd">{header}</div>}
 
-        {this.state.body && typeof(this.state.body)=='string' && <div className="react-modal-bd" dangerouslySetInnerHTML={{__html: this.state.body}}></div>}
-        {this.state.body && typeof(this.state.body)=='object' && <div className="react-modal-bd">{this.state.body}</div>}
+        {body && typeof(body)=='string' && <div className="react-modal-bd" dangerouslySetInnerHTML={{__html: body}}></div>}
+        {body && typeof(body)=='object' && <div className="react-modal-bd">{body}</div>}
 
-        {this.state.buttons.length>0 && <div className="react-modal-ft">
-          {this.state.buttons.map((item,index)=>{
+        {buttons.length>0 && <div className="react-modal-ft">
+          {buttons.map((item,index)=>{
             return <div key={index} className="react-modal-button" onClick={item.onClick.bind(this)}>{item.text}</div>
           })}
         </div>}

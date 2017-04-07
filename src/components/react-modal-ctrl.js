@@ -1,4 +1,5 @@
 import ReactModal from 'components/react-modal';
+import noop from 'noop';
 
 let instance;
 
@@ -8,12 +9,12 @@ export default class ReactModalCtrl {
     return instance;
   }
 
-  static show(inOptions){
-    instance.component.show(inOptions);
+  static show(inOptions,inCallback){
+    instance.component.show(inOptions,inCallback || noop);
   }
 
-  static hide(){
-    instance.component.hide();
+  static hide(inCallback){
+    instance.component.hide(inCallback || noop);
   }
 
   static destory(){

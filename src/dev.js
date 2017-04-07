@@ -49,6 +49,8 @@ class App extends React.Component{
           }
         }
       ]
+    },function(){
+      console.log('click.....')
     });
   }
 
