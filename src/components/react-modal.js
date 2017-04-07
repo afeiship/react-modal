@@ -68,8 +68,9 @@ export default class ReactModal extends ReactVisible{
     ReactBackdropCtrl.show();
     this.setState( options ,()=>{
       measureIt(root,(dimensions) => {
-        this.setState({ dimensions });
-        super.show(inCallback);
+        this.setState({ dimensions },()=>{
+          super.show(inCallback);
+        });
       });
     });
   }
@@ -78,6 +79,15 @@ export default class ReactModal extends ReactVisible{
     super.hide(inCallback);
     ReactBackdropCtrl.hide();
   }
+
+  _onTransitionEnd = (inEvent) => {
+    const {visible}  = this.state;
+    inEvent.persist();
+    this.setState({ animating:false },()=>{
+      !visible && this.setState({hidden:true});
+      (!visible || (inEvent.propertyName ==='opacity')) && this._callback();
+    });
+  };
 
   render(){
     const {visible,hidden,theme,animating,header,body,dimensions,buttons} = this.state;

@@ -45,12 +45,14 @@ class App extends React.Component{
         }, {
           text: 'CLOSE',
           onClick: function(item) {
-            ReactModalCtrl.hide();
+            ReactModalCtrl.hide(function(){
+              console.log('after hde...')
+            });
           }
         }
       ]
-    },function(){
-      console.log('click.....')
+    },()=>{
+      console.log('after shown.....')
     });
   }
 
