@@ -63,15 +63,15 @@ export default class ReactModal extends ReactVisible{
   }
 
   show(inOptions,inCallback){
-    super.show(inCallback);
-    ReactBackdropCtrl.show()
-    this.setState(
-      Object.assign({},this.props,inOptions),()=>{
-        measureIt(this.refs.root,(dimensions) => {
-          this.setState({ dimensions });
-        });
-      }
-    );
+    const {root} = this.refs;
+    const options = Object.assign({},this.props,inOptions);
+    ReactBackdropCtrl.show();
+    this.setState( options ,()=>{
+      measureIt(root,(dimensions) => {
+        this.setState({ dimensions });
+        super.show(inCallback);
+      });
+    });
   }
 
   hide(inCallback){
@@ -102,11 +102,13 @@ export default class ReactModal extends ReactVisible{
         {body && typeof(body)=='string' && <div className="react-modal-bd" dangerouslySetInnerHTML={{__html: body}}></div>}
         {body && typeof(body)=='object' && <div className="react-modal-bd">{body}</div>}
 
-        {buttons.length>0 && <div className="react-modal-ft">
-          {buttons.map((item,index)=>{
-            return <div key={index} className="react-modal-button" onClick={item.onClick.bind(this)}>{item.text}</div>
-          })}
-        </div>}
+        {buttons.length>0 && (
+          <div className="react-modal-ft">
+            {buttons.map((item,index)=>{
+              return <div key={index} className="react-modal-button" onClick={item.onClick.bind(this)}>{item.text}</div>
+            })}
+          </div>
+        )}
       </div>
     );
   }
