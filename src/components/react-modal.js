@@ -91,6 +91,7 @@ export default class ReactModal extends ReactVisible{
 
   render(){
     const {visible,hidden,theme,animating,header,body,dimensions,buttons} = this.state;
+    const {className} = this.props;
     return (
       <div
         ref="root"
@@ -99,13 +100,12 @@ export default class ReactModal extends ReactVisible{
         data-theme={theme}
         data-animating={animating}
         data-header={header}
-        data-height={dimensions.height}
         onTransitionEnd={this._onTransitionEnd}
         style={{
           marginTop:`-${dimensions.height/2}px`,
           marginLeft:`-${dimensions.width/2}px`
         }}
-        className={classNames('react-modal',this.props.className,{'no-header':!header},{'no-footer':buttons.length==0})}>
+        className={classNames('react-modal',className,{'no-header':!header},{'no-footer':buttons.length==0})}>
         {header && typeof(header)=='string' && <div className="react-modal-hd" dangerouslySetInnerHTML={{__html: header}}></div>}
         {header && typeof(header)=='object' && <div className="react-modal-hd">{header}</div>}
 
