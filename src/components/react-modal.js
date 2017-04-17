@@ -1,7 +1,7 @@
 import './style.scss';
 import classNames from 'classnames';
 import React,{PropTypes,PureComponent} from 'react';
-import {ReactBackdropCtrl} from 'react-backdrop';
+import {ReactBackdropCtrl,ReactBackdrop} from 'react-backdrop';
 import appendToDocument from 'react-append-to-document';
 import measureIt from 'measure-it';
 import ReactVisible from 'react-visible';
@@ -17,7 +17,6 @@ export default class ReactModal extends ReactVisible{
       PropTypes.string,
       PropTypes.element,
     ]),
-    visible:PropTypes.bool,
     theme:PropTypes.oneOf(['ios','tranparent']),
     buttons:PropTypes.array,
     backdropStyle:PropTypes.object
@@ -26,7 +25,6 @@ export default class ReactModal extends ReactVisible{
   static defaultProps = {
     header:null,
     body:null,
-    visible:false,
     theme:'ios',
     buttons:[],
     backdropStyle:{
@@ -46,10 +44,10 @@ export default class ReactModal extends ReactVisible{
       header:props.header,
       body:props.body,
       theme:props.theme,
-      visible:props.visible,
       buttons:props.buttons,
       dimensions:{},
-      hidden:!props.visible,
+      visible:false,
+      hidden:true,
       shouldMeasure:true,
       animating:false
     };
@@ -65,7 +63,6 @@ export default class ReactModal extends ReactVisible{
   show(inOptions,inCallback){
     const {root} = this.refs;
     const options = Object.assign({},this.props,inOptions);
-    ReactBackdropCtrl.show();
     this.setState( options ,()=>{
       measureIt(root,(dimensions) => {
         this.setState({ dimensions },()=>{
@@ -73,11 +70,6 @@ export default class ReactModal extends ReactVisible{
         });
       });
     });
-  }
-
-  hide(inCallback){
-    super.hide(inCallback);
-    ReactBackdropCtrl.hide();
   }
 
   _onTransitionEnd = (inEvent) => {
@@ -93,32 +85,35 @@ export default class ReactModal extends ReactVisible{
     const {visible,hidden,theme,animating,header,body,dimensions,buttons} = this.state;
     const {className} = this.props;
     return (
-      <div
-        ref="root"
-        data-visible={visible}
-        hidden={hidden}
-        data-theme={theme}
-        data-animating={animating}
-        data-header={header}
-        onTransitionEnd={this._onTransitionEnd}
-        style={{
-          marginTop:`-${dimensions.height/2}px`,
-          marginLeft:`-${dimensions.width/2}px`
-        }}
-        className={classNames('react-modal',className,{'no-header':!header},{'no-footer':buttons.length==0})}>
-        {header && typeof(header)=='string' && <div className="react-modal-hd" dangerouslySetInnerHTML={{__html: header}}></div>}
-        {header && typeof(header)=='object' && <div className="react-modal-hd">{header}</div>}
+      <div className="react-modal-container">
+        <ReactBackdrop onClick={()=>{this.hide()}} visible={visible}  />
+        <div
+          ref="root"
+          data-visible={visible}
+          hidden={hidden}
+          data-theme={theme}
+          data-animating={animating}
+          data-header={header}
+          onTransitionEnd={this._onTransitionEnd}
+          style={{
+            marginTop:`-${dimensions.height/2}px`,
+            marginLeft:`-${dimensions.width/2}px`
+          }}
+          className={classNames('react-modal',className,{'no-header':!header},{'no-footer':buttons.length==0})}>
+          {header && typeof(header)=='string' && <div className="react-modal-hd" dangerouslySetInnerHTML={{__html: header}}></div>}
+          {header && typeof(header)=='object' && <div className="react-modal-hd">{header}</div>}
 
-        {body && typeof(body)=='string' && <div className="react-modal-bd" dangerouslySetInnerHTML={{__html: body}}></div>}
-        {body && typeof(body)=='object' && <div className="react-modal-bd">{body}</div>}
+          {body && typeof(body)=='string' && <div className="react-modal-bd" dangerouslySetInnerHTML={{__html: body}}></div>}
+          {body && typeof(body)=='object' && <div className="react-modal-bd">{body}</div>}
 
-        {buttons.length>0 && (
-          <div className="react-modal-ft">
-            {buttons.map((item,index)=>{
-              return <div key={index} className="react-modal-button" onClick={item.onClick.bind(this)}>{item.text}</div>
-            })}
-          </div>
-        )}
+          {buttons.length>0 && (
+            <div className="react-modal-ft">
+              {buttons.map((item,index)=>{
+                return <div key={index} className="react-modal-button" onClick={item.onClick.bind(this)}>{item.text}</div>
+              })}
+            </div>
+          )}
+        </div>
       </div>
     );
   }
