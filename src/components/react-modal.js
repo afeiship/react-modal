@@ -1,7 +1,7 @@
 import './style.scss';
 import classNames from 'classnames';
 import React,{PropTypes,PureComponent} from 'react';
-import {ReactBackdropCtrl,ReactBackdrop} from 'react-backdrop';
+import {ReactBackdrop} from 'react-backdrop';
 import appendToDocument from 'react-append-to-document';
 import measureIt from 'measure-it';
 import ReactVisible from 'react-visible';
@@ -54,15 +54,10 @@ export default class ReactModal extends ReactVisible{
     this._timer = null;
   }
 
-  componentWillMount(){
-    ReactBackdropCtrl.createInstance({
-      style:this.props.backdropStyle
-    });
-  }
-
   show(inOptions,inCallback){
     const {root} = this.refs;
-    const options = Object.assign({},this.props,inOptions);
+    const options = Object.assign({...this.props},inOptions);
+    console.log(options);
     this.setState( options ,()=>{
       measureIt(root,(dimensions) => {
         this.setState({ dimensions },()=>{
@@ -75,6 +70,7 @@ export default class ReactModal extends ReactVisible{
   _onTransitionEnd = (inEvent) => {
     const {visible}  = this.state;
     inEvent.persist();
+    console.log(this._callback)
     this.setState({ animating:false },()=>{
       !visible && this.setState({hidden:true});
       (!visible || (inEvent.propertyName ==='opacity')) && this._callback();
@@ -83,10 +79,10 @@ export default class ReactModal extends ReactVisible{
 
   render(){
     const {visible,hidden,theme,animating,header,body,dimensions,buttons} = this.state;
-    const {className} = this.props;
+    const {className,backdropStyle} = this.props;
     return (
       <div className="react-modal-container">
-        <ReactBackdrop onClick={()=>{this.hide()}} visible={visible}  />
+        <ReactBackdrop style={backdropStyle} visible={visible}  />
         <div
           ref="root"
           data-visible={visible}
