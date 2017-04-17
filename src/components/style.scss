@@ -47,7 +47,7 @@
     display: none;
   }
   &[data-visible=false]{
-    opacity: 0;
+    opacity: 0.01;
     transform: scale(1.085);
   }
 

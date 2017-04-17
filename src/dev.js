@@ -1,6 +1,7 @@
 import './dev.scss';
 import {ReactModal,ReactModalCtrl} from './main';
 
+//http://www.baidu.com/img/bd_logo1.png
 class Body extends React.Component{
   _click(){
     ReactModalCtrl.hide();
@@ -10,7 +11,7 @@ class Body extends React.Component{
       <div className="cus-body">
         <p><span className="bd">Hi Man!</span></p>
         <p>I am from <strong className="bd">Baidu</strong></p>
-        <p><img onClick={this._click.bind(this)} src="http://www.baidu.com/img/bd_logo1.png" /></p>
+        <p><img onClick={this._click.bind(this)} src="http://img4.cache.netease.com/photo/0001/2017-04-17/CI77983Q00AO0001.jpg" /></p>
       </div>
     );
   }
