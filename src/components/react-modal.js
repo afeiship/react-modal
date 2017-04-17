@@ -57,7 +57,6 @@ export default class ReactModal extends ReactVisible{
   show(inOptions,inCallback){
     const {root} = this.refs;
     const options = Object.assign({...this.props},inOptions);
-    console.log(options);
     this.setState( options ,()=>{
       measureIt(root,(dimensions) => {
         this.setState({ dimensions },()=>{
@@ -69,11 +68,12 @@ export default class ReactModal extends ReactVisible{
 
   _onTransitionEnd = (inEvent) => {
     const {visible}  = this.state;
+    const self = this;
     inEvent.persist();
-    console.log(this._callback)
+    console.log('update');
     this.setState({ animating:false },()=>{
       !visible && this.setState({hidden:true});
-      (!visible || (inEvent.propertyName ==='opacity')) && this._callback();
+      (!visible || (inEvent.propertyName ==='opacity')) && self._callback();
     });
   };
 
