@@ -2,6 +2,33 @@ import './dev.scss';
 import {ReactModal,ReactModalCtrl} from './main';
 
 //http://www.baidu.com/img/bd_logo1.png
+
+class Utils {
+  static alert(){
+    ReactModalCtrl.createInstance({
+      backdropOptions:{
+        zIndex:11,
+        opacity:0.1
+      }
+    });
+
+
+    ReactModalCtrl.show({
+      header: null,
+      body: 'test....',
+      buttons: [{
+        text: 'OK',
+        onClick: function(){
+          ReactModalCtrl.hide(()=>{
+            console.log('hide...')
+          })
+        }
+      }]
+    },function(){
+      console.log('show...')
+    })
+  }
+}
 class Body extends React.Component{
   _click(){
     ReactModalCtrl.hide();
@@ -95,6 +122,10 @@ class App extends React.Component{
     });
   }
 
+  _click5(){
+    Utils.alert();
+  }
+
   render(){
     return (
       <div className="hello-react-modal">
@@ -102,6 +133,7 @@ class App extends React.Component{
         <button onClick={this._click2.bind(this)}>TEST MODAL-  body</button>
         <button onClick={this._click3.bind(this)}>No Style</button>
         <button onClick={this._click4.bind(this)}>IOS Alert4</button>
+        <button onClick={this._click5.bind(this)}>utils Alert4</button>
       </div>
     );
   }
