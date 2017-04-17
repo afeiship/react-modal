@@ -64,14 +64,14 @@ export default class ReactModal extends ReactVisible{
     });
   }
 
-  _onTransitionEnd (inEvent) {
+  _onTransitionEnd =(inEvent)=> {
     const {visible}  = this.state;
     const propertyName = inEvent.propertyName;
     inEvent.persist();
     this.setState({ animating:false },()=>{
       !visible && this.setState({hidden:true});
       if(!visible || (propertyName ==='opacity')){
-        ReactVisible._callback();
+        this._callback();
       }
     });
   };
