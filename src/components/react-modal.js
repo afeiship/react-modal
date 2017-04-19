@@ -28,6 +28,7 @@ export default class ReactModal extends ReactVisible{
     theme:'ios',
     buttons:[],
     backdropStyle:{
+      position:'fixed',
       opacity:0.6
     }
   };
