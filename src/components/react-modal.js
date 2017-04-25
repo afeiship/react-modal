@@ -71,7 +71,7 @@ export default class ReactModal extends ReactVisible{
     this.setState({ animating:false },()=>{
       !visible && this.setState({hidden:true});
       if(!visible || (propertyName ==='opacity')){
-        if(typeof this._callback==='function'){
+        if(typeof this._callback === 'function'){
           this._callback();
         }
       }
