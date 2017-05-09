@@ -1,5 +1,6 @@
 import './dev.scss';
-import {ReactModal,ReactModalCtrl} from './main';
+
+import {ReactModal, ReactModalCtrl} from './main';
 
 //http://www.baidu.com/img/bd_logo1.png
 

@@ -1,10 +1,13 @@
 import './style.scss';
-import classNames from 'classnames';
-import React,{PropTypes,PureComponent} from 'react';
+
+import React,{PropTypes, PureComponent} from 'react';
+
 import {ReactBackdrop} from 'react-backdrop';
-import appendToDocument from 'react-append-to-document';
-import measureIt from 'measure-it';
 import ReactVisible from 'react-visible';
+import appendToDocument from 'react-append-to-document';
+import classNames from 'classnames';
+import measureIt from 'measure-it';
+import objectAssign from 'object-assign';
 
 export default class ReactModal extends ReactVisible{
   static propTypes = {
@@ -55,7 +58,7 @@ export default class ReactModal extends ReactVisible{
 
   show(inOptions,inCallback){
     const {root} = this.refs;
-    const options = Object.assign({...this.props},{hidden:false},inOptions);
+    const options = objectAssign({...this.props},{hidden:false},inOptions);
     this.setState( options ,()=>{
       measureIt(root,(dimensions) => {
         this.setState({ dimensions },()=>{
