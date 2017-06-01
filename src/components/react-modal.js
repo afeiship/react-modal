@@ -71,13 +71,10 @@ export default class ReactModal extends ReactVisible{
     const {visible}  = this.state;
     const propertyName = inEvent.propertyName;
     this.setState({ animating:false },()=>{
-      setTimeout(()=>{
-        !visible && this.setState({ hidden:true });
-      },1000);
+      !visible && this.setState({ hidden:true });
       if(!visible || (propertyName ==='opacity')){
         this.execCallback();
       }
-
     });
   };
 
