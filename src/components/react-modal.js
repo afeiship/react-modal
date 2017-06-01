@@ -57,6 +57,7 @@ export default class ReactModal extends ReactVisible{
 
   show(inOptions,inCallback){
     const {root} = this.refs;
+    debugger
     const options = objectAssign({...this.props},{hidden:false},inOptions);
     this.setState( options ,()=>{
       measureIt(root,(dimensions) => {
