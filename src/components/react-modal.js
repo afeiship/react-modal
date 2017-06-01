@@ -74,6 +74,7 @@ export default class ReactModal extends ReactVisible{
       !visible && this.setState({ hidden:true });
       if(!visible || (propertyName ==='opacity')){
         this.execCallback();
+        console.log('transition end',this);
       }
     });
   };
