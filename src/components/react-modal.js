@@ -22,6 +22,7 @@ export default class ReactModal extends ReactVisible{
     ]),
     theme:PropTypes.oneOf(['ios','tranparent']),
     buttons:PropTypes.array,
+    visible:PropTypes.bool,
     backdropStyle:PropTypes.object
   };
 
@@ -30,6 +31,7 @@ export default class ReactModal extends ReactVisible{
     body:null,
     theme:'ios',
     buttons:[],
+    visible:false,
     backdropStyle:{
       position:'fixed',
       opacity:0.6
@@ -49,10 +51,9 @@ export default class ReactModal extends ReactVisible{
       body:props.body,
       theme:props.theme,
       buttons:props.buttons,
+      visible:props.visible,
+      hidden:!props.visible,
       dimensions:{},
-      visible:false,
-      hidden:true,
-      shouldMeasure:true
     };
   }
 
@@ -72,11 +73,9 @@ export default class ReactModal extends ReactVisible{
     const {visible}  = this.state;
     const propertyName = inEvent.propertyName;
     this.setState({ animating:false },()=>{
-      !visible && this.setState({hidden:true});
+      !visible && this.setState({ hidden:true });
       if(!visible || (propertyName ==='opacity')){
-        if(typeof this._callback === 'function'){
-          this._callback();
-        }
+        this.execCallback();
       }
     });
   };
