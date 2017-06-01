@@ -57,7 +57,6 @@ export default class ReactModal extends ReactVisible{
 
   show(inOptions,inCallback){
     const {root} = this.refs;
-    debugger
     const options = objectAssign({...this.props},{hidden:false},inOptions);
     this.setState( options ,()=>{
       measureIt(root,(dimensions) => {
@@ -72,7 +71,6 @@ export default class ReactModal extends ReactVisible{
     const {visible}  = this.state;
     const propertyName = inEvent.propertyName;
     this.setState({ animating:false },()=>{
-      console.log('visible....',this.state)
       !visible && this.setState({ hidden:true });
       if(!visible || (propertyName ==='opacity')){
         this.execCallback();
