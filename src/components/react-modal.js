@@ -1,7 +1,8 @@
 import './style.scss';
 
-import React,{PropTypes, PureComponent} from 'react';
+import React,{ PureComponent } from 'react';
 
+import PropTypes from 'prop-types';
 import {ReactBackdrop} from 'react-backdrop';
 import ReactVisible from 'react-visible';
 import appendToDocument from 'react-append-to-document';
@@ -32,7 +33,8 @@ export default class ReactModal extends ReactVisible{
     buttons:[],
     backdropStyle:{
       position:'fixed',
-      opacity:0.6
+      opacity:0.6,
+      zIndex:99
     }
   };
 

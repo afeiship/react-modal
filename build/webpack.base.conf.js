@@ -16,6 +16,7 @@ var externals = process.env.NODE_ENV === 'production' ? {
   'react-backdrop': 'react-backdrop',
   'react-append-to-document': 'react-append-to-document',
   'measure-it': 'measure-it',
+  'prop-types': 'prop-types',
   'object-assign': 'object-assign',
   'react-visible': 'react-visible',
 } : {};

@@ -82,6 +82,7 @@
     "classnames": "^2.2.5",
     "measure-it": "github:afeiship/measure-it",
     "object-assign": "^4.1.1",
+    "prop-types": "^15.5.10",
     "react": "^15.4.2",
     "react-append-to-document": "github:afeiship/react-append-to-document",
     "react-backdrop": "github:afeiship/react-backdrop",
