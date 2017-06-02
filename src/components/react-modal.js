@@ -96,7 +96,6 @@ export default class ReactModal extends ReactVisible{
           hidden={hidden}
           data-theme={theme}
           data-animating={animating}
-          data-header={header}
           onTransitionEnd={this._onTransitionEnd}
           style={{
             marginTop:`-${dimensions.height/2}px`,
