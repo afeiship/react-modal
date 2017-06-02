@@ -4,6 +4,8 @@ import React,{ PureComponent } from 'react';
 
 import PropTypes from 'prop-types';
 import {ReactBackdrop} from 'react-backdrop';
+import ReactConditionManager from 'react-condition-manager';
+import ReactDOM from 'react-dom';
 import ReactVisible from 'react-visible';
 import appendToDocument from 'react-append-to-document';
 import classNames from 'classnames';
@@ -59,9 +61,10 @@ export default class ReactModal extends ReactVisible{
 
   show(inOptions,inCallback){
     const {root} = this.refs;
+    const rootDom = ReactDOM.findDOMNode(root);
     const options = objectAssign({...this.props},{hidden:false},inOptions);
     this.setState( options ,()=>{
-      measureIt(root,(dimensions) => {
+      measureIt(rootDom,(dimensions) => {
         this.setState({ dimensions },()=>{
           super.show(inCallback);
         });
@@ -82,11 +85,12 @@ export default class ReactModal extends ReactVisible{
 
   render(){
     const {visible,hidden,theme,animating,header,body,dimensions,buttons} = this.state;
-    const {className,backdropStyle} = this.props;
+    const {className,backdropStyle,children} = this.props;
+
     return (
       <div className="react-modal-container">
         <ReactBackdrop style={backdropStyle} visible={visible}  />
-        <div
+        <ReactConditionManager
           ref="root"
           data-visible={visible}
           hidden={hidden}
@@ -98,21 +102,24 @@ export default class ReactModal extends ReactVisible{
             marginTop:`-${dimensions.height/2}px`,
             marginLeft:`-${dimensions.width/2}px`
           }}
-          className={classNames('react-modal',className,{'no-header':!header},{'no-footer':buttons.length==0})}>
-          {header && typeof(header)=='string' && <div className="react-modal-hd" dangerouslySetInnerHTML={{__html: header}}></div>}
-          {header && typeof(header)=='object' && <div className="react-modal-hd">{header}</div>}
-
-          {body && typeof(body)=='string' && <div className="react-modal-bd" dangerouslySetInnerHTML={{__html: body}}></div>}
-          {body && typeof(body)=='object' && <div className="react-modal-bd">{body}</div>}
-
-          {buttons.length>0 && (
-            <div className="react-modal-ft">
+          className={classNames('react-modal',className,{'no-header':!header},{'no-footer':buttons.length==0})}
+          conditionList={[
+          header && typeof(header)=='string',
+          header && typeof(header)=='object',
+          body && typeof(body)=='string',
+          body && typeof(body)=='object',
+          buttons.length>0
+        ]}>
+          <header className="react-modal-hd" dangerouslySetInnerHTML={{__html: header}}></header>
+          <header className="react-modal-hd">{header}</header>
+          <div className="react-modal-bd" dangerouslySetInnerHTML={{__html: body}}></div>
+          <div className="react-modal-bd">{body}</div>
+          <footer className="react-modal-ft">
               {buttons.map((item,index)=>{
                 return <div key={index} className="react-modal-button" onClick={item.onClick.bind(this)}>{item.text}</div>
               })}
-            </div>
-          )}
-        </div>
+          </footer>
+        </ReactConditionManager>
       </div>
     );
   }

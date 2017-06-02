@@ -86,6 +86,7 @@
     "react": "^15.4.2",
     "react-append-to-document": "github:afeiship/react-append-to-document",
     "react-backdrop": "github:afeiship/react-backdrop",
+    "react-condition-manager": "github:afeiship/react-condition-manager",
     "react-dom": "^15.4.2",
     "react-visible": "github:afeiship/react-visible"
   }
