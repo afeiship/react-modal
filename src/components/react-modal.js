@@ -104,21 +104,23 @@ export default class ReactModal extends ReactVisible{
           }}
           className={classNames('react-modal',className,{'no-header':!header},{'no-footer':buttons.length==0})}
           conditionList={[
-          header && typeof(header)=='string',
-          header && typeof(header)=='object',
-          body && typeof(body)=='string',
-          body && typeof(body)=='object',
-          buttons.length>0
+          !children && header && typeof(header)=='string',
+          !children && header && typeof(header)=='object',
+          !children && body && typeof(body)=='string',
+          !children && body && typeof(body)=='object',
+          !children && buttons.length>0,
+          children
         ]}>
           <header className="react-modal-hd" dangerouslySetInnerHTML={{__html: header}}></header>
           <header className="react-modal-hd">{header}</header>
-          <div className="react-modal-bd" dangerouslySetInnerHTML={{__html: body}}></div>
-          <div className="react-modal-bd">{body}</div>
-          <footer className="react-modal-ft">
+          <section className="react-modal-bd" dangerouslySetInnerHTML={{__html: body}}></section>
+          <section className="react-modal-bd">{body}</section>
+          <menu className="react-modal-ft">
               {buttons.map((item,index)=>{
-                return <div key={index} className="react-modal-button" onClick={item.onClick.bind(this)}>{item.text}</div>
+                return <li key={index} className="react-modal-button" onClick={item.onClick.bind(this)}>{item.text}</li>
               })}
-          </footer>
+          </menu>
+          {children}
         </ReactConditionManager>
       </div>
     );

@@ -149,3 +149,7 @@ class App extends React.Component{
 }
 
 ```
+
+## todo:
++ [ ] remove theme properies
++ [ ] refator body & children part.

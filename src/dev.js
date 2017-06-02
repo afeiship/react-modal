@@ -30,6 +30,7 @@ class Utils {
     })
   }
 }
+
 class Body extends React.Component{
   _click(){
     ReactModalCtrl.hide();
@@ -47,6 +48,9 @@ class Body extends React.Component{
 
 
 class App extends React.Component{
+  state = {
+    radom:'123'
+  };
   componentDidMount(){
     console.log('will / did..');
     ReactModalCtrl.createInstance({
@@ -127,6 +131,14 @@ class App extends React.Component{
     Utils.alert();
   }
 
+  _click6(){
+    this.refs.mdl.show();
+  }
+
+  _random(){
+    this.setState({radom:Math.random()*10})
+  }
+
   render(){
     return (
       <div className="hello-react-modal">
@@ -135,6 +147,20 @@ class App extends React.Component{
         <button onClick={this._click3.bind(this)}>No Style</button>
         <button onClick={this._click4.bind(this)}>IOS Alert4</button>
         <button onClick={this._click5.bind(this)}>utils Alert4</button>
+        <button onClick={this._click6.bind(this)}>Inine Modal</button>
+
+
+        <ReactModal ref='mdl'>
+          <p>I a inline modal.</p>
+          <section>
+            So,you can Customize by yourself;
+          </section>
+          <p>Random data:{this.state.radom}</p>
+          <button style={{background:"#007aff"}}  onClick={this._random.bind(this)}>Random the data</button>
+          <button style={{background:"#f60"}} onClick={()=>{
+            this.refs.mdl.hide();
+          }}>close me!</button>
+        </ReactModal>
       </div>
     );
   }
