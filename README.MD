@@ -14,16 +14,32 @@
 
 ## properties:
 ```javascript
-static propTypes = {
-  className:PropTypes.string,
-  buttons:PropTypes.array,
-  backdropStyle:PropTypes.object,
-  theme:PropTypes.oneOf(['ios','tranparent']),
-  body:PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-  ])
-};
+  static propTypes = {
+    className:PropTypes.string,
+    header:PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.element,
+    ]),
+    body:PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.element,
+    ]),
+    theme:PropTypes.oneOf(['ios','tranparent']),
+    buttons:PropTypes.array,
+    backdropStyle:PropTypes.object
+  };
+
+  static defaultProps = {
+    header:null,
+    body:null,
+    theme:'ios',
+    buttons:[],
+    backdropStyle:{
+      position:'fixed',
+      opacity:0.6,
+      zIndex:99
+    }
+  };
 ```
 
 
