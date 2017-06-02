@@ -46,6 +46,34 @@
 ## usage:
 ```javascript
 import {ReactModal,ReactModalCtrl} from 'react-modal';
+//http://www.baidu.com/img/bd_logo1.png
+
+class Utils {
+  static alert(){
+    ReactModalCtrl.createInstance({
+      backdropOptions:{
+        zIndex:11,
+        opacity:0.1
+      }
+    });
+
+
+    ReactModalCtrl.show({
+      header: null,
+      body: 'test....',
+      buttons: [{
+        text: 'OK',
+        onClick: function(){
+          ReactModalCtrl.hide(()=>{
+            console.log('hide...')
+          })
+        }
+      }]
+    },function(){
+      console.log('show...')
+    })
+  }
+}
 
 class Body extends React.Component{
   _click(){
@@ -56,7 +84,7 @@ class Body extends React.Component{
       <div className="cus-body">
         <p><span className="bd">Hi Man!</span></p>
         <p>I am from <strong className="bd">Baidu</strong></p>
-        <p><img onClick={this._click.bind(this)} src="http://www.baidu.com/img/bd_logo1.png" /></p>
+        <p><img onClick={this._click.bind(this)} src="http://img4.cache.netease.com/photo/0001/2017-04-17/CI77983Q00AO0001.jpg" /></p>
       </div>
     );
   }
@@ -64,6 +92,9 @@ class Body extends React.Component{
 
 
 class App extends React.Component{
+  state = {
+    radom:'123'
+  };
   componentDidMount(){
     console.log('will / did..');
     ReactModalCtrl.createInstance({
@@ -91,10 +122,14 @@ class App extends React.Component{
         }, {
           text: 'CLOSE',
           onClick: function(item) {
-            ReactModalCtrl.hide();
+            ReactModalCtrl.hide(function(){
+              console.log('after hde...')
+            });
           }
         }
       ]
+    },()=>{
+      console.log('after shown.....')
     });
   }
 
@@ -136,6 +171,18 @@ class App extends React.Component{
     });
   }
 
+  _click5(){
+    Utils.alert();
+  }
+
+  _click6(){
+    this.refs.mdl.show();
+  }
+
+  _random(){
+    this.setState({radom:Math.random()*10})
+  }
+
   render(){
     return (
       <div className="hello-react-modal">
@@ -143,6 +190,21 @@ class App extends React.Component{
         <button onClick={this._click2.bind(this)}>TEST MODAL-  body</button>
         <button onClick={this._click3.bind(this)}>No Style</button>
         <button onClick={this._click4.bind(this)}>IOS Alert4</button>
+        <button onClick={this._click5.bind(this)}>utils Alert4</button>
+        <button onClick={this._click6.bind(this)}>Inine Modal</button>
+
+
+        <ReactModal ref='mdl'>
+          <p>I a inline modal.</p>
+          <section>
+            So,you can Customize by yourself;
+          </section>
+          <p>Random data:{this.state.radom}</p>
+          <button style={{background:"#007aff"}}  onClick={this._random.bind(this)}>Random the data</button>
+          <button style={{background:"#f60"}} onClick={()=>{
+            this.refs.mdl.hide();
+          }}>close me!</button>
+        </ReactModal>
       </div>
     );
   }
