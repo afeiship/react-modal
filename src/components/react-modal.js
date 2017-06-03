@@ -26,11 +26,13 @@ export default class ReactModal extends ReactVisible {
     ]),
     buttons: PropTypes.array,
     buttonsAlign: PropTypes.oneOf(['horizontal', 'vertical']),
+    transparent:PropTypes.bool,
     backdropStyle: PropTypes.object
   };
 
   static defaultProps = {
     className:'',
+    transparent:false,
     header: null,
     body: null,
     buttons: [],
@@ -53,6 +55,7 @@ export default class ReactModal extends ReactVisible {
     super(props);
     this.state = {
       className: props.className,
+      transparent:props.transparent,
       header: props.header,
       body: props.body,
       buttons: props.buttons,
@@ -89,7 +92,7 @@ export default class ReactModal extends ReactVisible {
   };
 
   render() {
-    const {className, visible, hidden, animating, header, body, dimensions, buttons, buttonsAlign, backdropStyle} = this.state;
+    const {className,transparent, visible, hidden, animating, header, body, dimensions, buttons, buttonsAlign, backdropStyle} = this.state;
     const {children} = this.props;
 
     return (
@@ -100,12 +103,13 @@ export default class ReactModal extends ReactVisible {
           data-visible={visible}
           hidden={hidden}
           data-animating={animating}
+          data-transparent={transparent}
           onTransitionEnd={this._onTransitionEnd}
           style={{
             marginTop: `-${dimensions.height / 2}px`,
             marginLeft: `-${dimensions.width / 2}px`
           }}
-          className={classNames('react-modal', className, {'no-header': !header}, {'no-footer': buttons.length == 0})}
+          className={classNames('react-modal', className)}
           conditionList={[
             !children && header && typeof(header) == 'string',
             !children && header && typeof(header) == 'object',

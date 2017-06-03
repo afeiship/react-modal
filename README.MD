@@ -2,8 +2,9 @@
 > Modal components for react(alert/confirm &amp; the common modal components).
 
 ## size:
-+ 20K	react-modal.js
-+ 84K	react-modal.js.map
+ + 16K	react-modal.js
+ + 68K	react-modal.js.map
+
 
 ## properties:
 ```javascript
@@ -20,10 +21,13 @@
     ]),
     buttons: PropTypes.array,
     buttonsAlign: PropTypes.oneOf(['horizontal', 'vertical']),
+    transparent:PropTypes.bool,
     backdropStyle: PropTypes.object
   };
 
   static defaultProps = {
+    className:'',
+    transparent:false,
     header: null,
     body: null,
     buttons: [],
@@ -34,7 +38,7 @@
       zIndex: 99
     }
   };
-
+  
 ```
 
 ## usage:
@@ -198,8 +202,9 @@ class App extends React.Component{
         <button onClick={this._click7.bind(this)}>Button Vertical Alignment</button>
 
 
-        <ReactModal ref='mdl'>
+        <ReactModal ref='mdl' transparent>
           <p>I a inline modal.</p>
+          <p>I am a transparent one.</p>
           <section>
             So,you can Customize by yourself;
           </section>

@@ -42,6 +42,8 @@
   transform: scale(1.185);
   transition: transform 0.2s ease-in-out,opacity 0.22s linear;
   user-select:none;
+  border-radius: 13px;
+  overflow: hidden;
 
 
   //animating && hidden && visible:
@@ -61,25 +63,10 @@
     transform: scale(1);
   }
 
-  >*{
-    background: rgba(#FFF,.95);
-  }
-
-
-
-  //no header OR no footer:
-  &.no-header{
-    .react-modal-bd{
-      border-top-left-radius: 13px;
-      border-top-right-radius: 13px;
-    }
-  }
-
-  //no footer:
-  &.no-footer{
-    .react-modal-bd{
-      border-bottom-left-radius: 13px;
-      border-bottom-right-radius: 13px;
+  //transparent:
+  &[data-transparent=false]{
+    >*{
+      background: rgba(#FFF,.95);
     }
   }
 
@@ -89,7 +76,6 @@
     padding:15px 15px 0;
     font-size: 18px;
     text-align: center;
-    border-radius: 13px 13px 0 0;
     font-weight: bold;
   }
 
@@ -103,7 +89,6 @@
     &:after{
       top:0;
     }
-    border-radius: 0 0 13px 13px;
     height: 44px;
     display: flex;
     justify-content: center;
@@ -121,13 +106,6 @@
       &:after{
         top:0;
       }
-      &:first-child{
-        border-bottom-left-radius: 0;
-      }
-
-      &:last-child{
-        border-radius: 0 0 13px 13px;
-      }
     }
   }
 
@@ -138,13 +116,6 @@
     }
     &:active{
       background: #dedede;
-    }
-    &:first-child{
-      border-bottom-left-radius: 13px;
-    }
-
-    &:last-child{
-      border-bottom-right-radius: 13px;
     }
 
     + .react-modal-button{

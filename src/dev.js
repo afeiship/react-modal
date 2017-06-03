@@ -162,8 +162,9 @@ class App extends React.Component{
         <button onClick={this._click7.bind(this)}>Button Vertical Alignment</button>
 
 
-        <ReactModal ref='mdl'>
+        <ReactModal ref='mdl' transparent>
           <p>I a inline modal.</p>
+          <p>I am a transparent one.</p>
           <section>
             So,you can Customize by yourself;
           </section>
