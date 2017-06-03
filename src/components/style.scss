@@ -31,6 +31,7 @@
     transform: scaleX(.5);
   }
 }
+
 .react-modal{
   font-family: -apple-system,SF UI Text,Helvetica Neue,Helvetica,Arial,sans-serif;
   width: 80%;
@@ -40,9 +41,10 @@
   z-index:100;
   transform: scale(1.185);
   transition: transform 0.2s ease-in-out,opacity 0.22s linear;
-
   user-select:none;
 
+
+  //animating && hidden && visible:
   &[hidden]{
     display: none;
   }
@@ -59,38 +61,13 @@
     transform: scale(1);
   }
 
-
-  &[data-theme=tranparent]{}
-  &[data-theme=ios]{
-    >*{
-      background: rgba(#FFF,.95);
-    }
-    .react-modal-ft{
-      // border-top: 1px solid #dedede;
-      @extend .hairline-x;
-      &:after{
-        top:0;
-      }
-      border-radius: 0 0 13px 13px;
-      height: 44px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .react-modal-button{
-      &:active{
-        background: #dedede;
-      }
-      + .react-modal-button{
-        position: relative;
-        @extend .hairline-y;
-        &:after{
-          left:0;
-        }
-      }
-    }
+  >*{
+    background: rgba(#FFF,.95);
   }
 
+
+
+  //no header OR no footer:
   &.no-header{
     .react-modal-bd{
       border-top-left-radius: 13px;
@@ -98,6 +75,7 @@
     }
   }
 
+  //no footer:
   &.no-footer{
     .react-modal-bd{
       border-bottom-left-radius: 13px;
@@ -105,6 +83,8 @@
     }
   }
 
+
+  //header/body/footer
   &-hd{
     padding:15px 15px 0;
     font-size: 18px;
@@ -112,20 +92,53 @@
     border-radius: 13px 13px 0 0;
     font-weight: bold;
   }
+
   &-bd{
     text-align: center;
     padding:15px;
   }
 
   &-ft{
-    // border-top: 1px solid #dedede;
+    @extend .hairline-x;
+    &:after{
+      top:0;
+    }
     border-radius: 0 0 13px 13px;
     height: 44px;
     display: flex;
     justify-content: center;
   }
 
+
+  //vertical buttons:
+  .react-modal-ft[data-buttons-align=vertical]{
+    height:auto;
+    display: block;
+    >.react-modal-button{
+      height:auto;
+      padding:0;
+      @extend .hairline-x;
+      &:after{
+        top:0;
+      }
+      &:first-child{
+        border-bottom-left-radius: 0;
+      }
+
+      &:last-child{
+        border-radius: 0 0 13px 13px;
+      }
+    }
+  }
+
+
   &-button{
+    &:focus{
+      outline:none;
+    }
+    &:active{
+      background: #dedede;
+    }
     &:first-child{
       border-bottom-left-radius: 13px;
     }
@@ -133,16 +146,25 @@
     &:last-child{
       border-bottom-right-radius: 13px;
     }
+
+    + .react-modal-button{
+      position: relative;
+      @extend .hairline-y;
+      &:after{
+        left:0;
+      }
+    }
+    background: none;
+    border:none;
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     width: 100%;
-    padding: 0 5px;
     height: 44px;
     font-size: 17px;
     line-height: 44px;
-    text-align: center;
     color: #007aff;
     display: block;
+    padding:0 5px;
     position: relative;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -152,4 +174,5 @@
     -webkit-box-flex: 1;
     -ms-flex: 1;
   }
+
 }

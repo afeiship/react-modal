@@ -1,82 +1,53 @@
 # react-modal
 > Modal components for react(alert/confirm &amp; the common modal components).
 
-
 ## size:
- + 16K	react-modal.js
- + 68K	react-modal.js.map
-
-## resource:
-+ http://www.cnblogs.com/Kummy/p/4966937.html
-+ https://github.com/steven5538/vue-button
-+ https://yarnpkg.com/en/docs/install
-
++ 20K	react-modal.js
++ 84K	react-modal.js.map
 
 ## properties:
 ```javascript
+
   static propTypes = {
-    className:PropTypes.string,
-    header:PropTypes.oneOfType([
+    className: PropTypes.string,
+    header: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.element,
     ]),
-    body:PropTypes.oneOfType([
+    body: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.element,
     ]),
-    theme:PropTypes.oneOf(['ios','tranparent']),
-    buttons:PropTypes.array,
-    backdropStyle:PropTypes.object
+    buttons: PropTypes.array,
+    buttonsAlign: PropTypes.oneOf(['horizontal', 'vertical']),
+    backdropStyle: PropTypes.object
   };
 
   static defaultProps = {
-    header:null,
-    body:null,
-    theme:'ios',
-    buttons:[],
-    backdropStyle:{
-      position:'fixed',
-      opacity:0.6,
-      zIndex:99
+    header: null,
+    body: null,
+    buttons: [],
+    buttonsAlign: 'horizontal',
+    backdropStyle: {
+      position: 'fixed',
+      opacity: 0.6,
+      zIndex: 99
     }
   };
+
 ```
 
-
 ## usage:
-```javascript
-import {ReactModal,ReactModalCtrl} from 'react-modal';
-//http://www.baidu.com/img/bd_logo1.png
+```jsx
+// install: npm install afeiship/react-modal --save
+// import : import {ReactModal, ReactModalCtrl} from 'react-modal'
 
-class Utils {
-  static alert(){
-    ReactModalCtrl.createInstance({
-      backdropOptions:{
-        zIndex:11,
-        opacity:0.1
-      }
-    });
-
-
-    ReactModalCtrl.show({
-      header: null,
-      body: 'test....',
-      buttons: [{
-        text: 'OK',
-        onClick: function(){
-          ReactModalCtrl.hide(()=>{
-            console.log('hide...')
-          })
-        }
-      }]
-    },function(){
-      console.log('show...')
-    })
-  }
-}
 
 class Body extends React.Component{
   _click(){
+    //http://img4.cache.netease.com/photo/0001/2017-04-17/CI77983Q00AO0001.jpg
+    //https://www.google.co.jp/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    //http://cms-bucket.nosdn.127.net/a6831f1374a243e2a7262476a430a96b20170424090100.jpeg
     ReactModalCtrl.hide();
   }
   render(){
@@ -84,7 +55,7 @@ class Body extends React.Component{
       <div className="cus-body">
         <p><span className="bd">Hi Man!</span></p>
         <p>I am from <strong className="bd">Baidu</strong></p>
-        <p><img onClick={this._click.bind(this)} src="http://img4.cache.netease.com/photo/0001/2017-04-17/CI77983Q00AO0001.jpg" /></p>
+        <p><img onClick={this._click.bind(this)} src="http://cms-bucket.nosdn.127.net/a6831f1374a243e2a7262476a430a96b20170424090100.jpeg" /></p>
       </div>
     );
   }
@@ -107,9 +78,13 @@ class App extends React.Component{
 
   _click1(){
     ReactModalCtrl.show({
+      className:'my-modal',
       header:'Customize <b style="color:#F00">Modal</b>',
       body:'Are you feel <b>good</b> today?',
       theme:'ios',
+      backdropStyle:{
+        opacity:0.2
+      },
       buttons:[
         {
           text: 'option1',
@@ -135,7 +110,7 @@ class App extends React.Component{
 
 
   _click2(){
-    console.log('click2....');
+    // console.log('click2....');
     ReactModalCtrl.show({
       header:'<b>Title</b><span style="color:#F00">With Color</span>',
       body:<Body />,
@@ -171,10 +146,6 @@ class App extends React.Component{
     });
   }
 
-  _click5(){
-    Utils.alert();
-  }
-
   _click6(){
     this.refs.mdl.show();
   }
@@ -183,15 +154,48 @@ class App extends React.Component{
     this.setState({radom:Math.random()*10})
   }
 
+  _click7(){
+    ReactModalCtrl.show({
+      body:'I am a vertical buttons modal.',
+      buttonsAlign:'vertical',
+      buttons:[{
+        text:'OK',
+        onClick:function(item){
+          console.log('ok!');
+          ReactModalCtrl.hide();
+        }
+      },{
+        text:'Wait?',
+        onClick:function(item){
+          console.log('wait!',item);
+          ReactModalCtrl.hide();
+        }
+      },{
+        text:'What?',
+        onClick:function(item){
+          console.log('What?!',item);
+          ReactModalCtrl.hide();
+        }
+      },{
+        text:'Cancel?',
+        onClick:function(item){
+          console.log('cancel!',item);
+          ReactModalCtrl.hide();
+        }
+      }]
+    });
+  }
+
+
   render(){
     return (
       <div className="hello-react-modal">
         <button onClick={this._click1.bind(this)}>TEST MODAL</button>
-        <button onClick={this._click2.bind(this)}>TEST MODAL-  body</button>
+        <button onClick={this._click2.bind(this)}>TEST MODAL - Load Image</button>
         <button onClick={this._click3.bind(this)}>No Style</button>
         <button onClick={this._click4.bind(this)}>IOS Alert4</button>
-        <button onClick={this._click5.bind(this)}>utils Alert4</button>
         <button onClick={this._click6.bind(this)}>Inine Modal</button>
+        <button onClick={this._click7.bind(this)}>Button Vertical Alignment</button>
 
 
         <ReactModal ref='mdl'>
@@ -212,6 +216,8 @@ class App extends React.Component{
 
 ```
 
+
 ## todo:
-+ [ ] remove theme properies
++ [x] remove theme properies
 + [ ] refator body & children part.
++ [ ] load image from out of GTW will not success.

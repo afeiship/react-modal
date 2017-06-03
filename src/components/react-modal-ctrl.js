@@ -1,24 +1,24 @@
 import ReactModal from 'components/react-modal';
 import noop from 'noop';
 
-let instance;
+export default class {
+  static _instance = null;
 
-export default class ReactModalCtrl {
   static createInstance(inProps) {
-    instance = instance || ReactModal.newInstance(inProps);
-    return instance;
+    this._instance = this._instance || ReactModal.newInstance(inProps);
+    return this._instance;
   }
 
-  static show(inOptions,inCallback){
-    instance.component.show(inOptions,inCallback || noop);
+  static show(inOptions, inCallback) {
+    this._instance.component.show(inOptions, inCallback || noop);
   }
 
-  static hide(inCallback){
-    instance.component.hide(inCallback || noop);
+  static hide(inCallback) {
+    this._instance.component.hide(inCallback || noop);
   }
 
-  static destory(){
-    instance.destory();
-    instance=null;
+  static destory() {
+    this._instance.destory();
+    this._instance = null;
   }
 }
