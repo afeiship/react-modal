@@ -30,6 +30,7 @@ export default class ReactModal extends ReactVisible {
   };
 
   static defaultProps = {
+    className:'',
     header: null,
     body: null,
     buttons: [],
