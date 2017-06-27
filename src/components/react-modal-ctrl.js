@@ -9,12 +9,12 @@ export default class ReactModalCtrl{
     return ReactModalCtrl._instance;
   }
 
-  static show(inOptions, inCallback) {
-    ReactModalCtrl._instance.component.show(inOptions, inCallback || noop);
+  static show(inOptions) {
+    return ReactModalCtrl._instance.component.show(inOptions);
   }
 
   static hide(inCallback) {
-    ReactModalCtrl._instance.component.hide(inCallback || noop);
+    return ReactModalCtrl._instance.component.hide();
   }
 
   static destory() {

@@ -67,17 +67,18 @@ export default class ReactModal extends ReactVisible {
     };
   }
 
-  show(inOptions, inCallback) {
+  show(inOptions) {
     const {root} = this.refs;
     const rootDom = ReactDOM.findDOMNode(root);
     const options = objectAssign({...this.props}, {hidden: false}, inOptions);
     this.setState(options, () => {
       measureIt(rootDom, (dimensions) => {
         this.setState({dimensions}, () => {
-          super.show(inCallback);
+          super.show();
         });
       });
     });
+    return this;
   }
 
   _onTransitionEnd = (inEvent) => {

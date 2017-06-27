@@ -67,7 +67,7 @@ class App extends React.Component{
           }
         }
       ]
-    },()=>{
+    }).then(()=>{
       console.log('after shown.....')
     });
   }
