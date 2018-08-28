@@ -1,6 +1,6 @@
 {
   "name": "react-modal",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Modal components for react(alert/confirm &amp; the common modal components).",
   "author": "afeiship <1290657123@qq.com>",
   "keywords": [
