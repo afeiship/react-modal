@@ -81,15 +81,16 @@
     "npm": ">= 3.0.0"
   },
   "dependencies": {
+    "calc-matrix": "github:afeiship/calc-matrix",
     "classnames": "^2.2.5",
     "measure-it": "github:afeiship/measure-it",
     "object-assign": "^4.1.1",
     "prop-types": "^15.5.10",
-    "react": "^15.4.2",
     "react-append-to-document": "github:afeiship/react-append-to-document",
     "react-backdrop": "github:afeiship/react-backdrop",
     "react-condition-manager": "github:afeiship/react-condition-manager",
-    "react-dom": "^15.4.2",
-    "react-visible": "github:afeiship/react-visible"
+    "react-visible": "github:afeiship/react-visible",
+    "webkit-sassui-backdrop": "github:afeiship/webkit-sassui-backdrop",
+    "webkit-sassui-modal": "github:afeiship/webkit-sassui-modal"
   }
 }
