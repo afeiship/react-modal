@@ -16,8 +16,8 @@ export default class extends React.Component {
   static defaultProps = {
     className: '',
     value: false,
-    backdrop: true,
-    onChange: noop
+    onChange: noop,
+    backdrop: true
   };
   /*===properties end===*/
 
