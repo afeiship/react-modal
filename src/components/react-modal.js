@@ -4,13 +4,19 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import noop from 'noop';
 
+const OBJECT = 'object';
+const EMPTY_OBJECT = {};
+
 export default class extends React.Component {
   /*===properties start===*/
   static propTypes = {
     className: PropTypes.string,
     value: PropTypes.bool,
     onChange: PropTypes.func,
-    backdrop: PropTypes.bool
+    backdrop: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.object
+    ])
   };
 
   static defaultProps = {
@@ -60,6 +66,7 @@ export default class extends React.Component {
   render() {
     const { className, backdrop, backdropProps, ...props } = this.props;
     const { value, hidden } = this.state;
+    const bakcdropProps = typeof backdrop === OBJECT ? backdrop : EMPTY_OBJECT;
 
     return (
       <Fragment>
@@ -68,15 +75,17 @@ export default class extends React.Component {
           data-visible={value}
           onAnimationEnd={this._onAnimationEnd}
           className={classNames('webkit-sassui-modal react-modal', className)}
-          {...props} />
+          {...props}
+        />
 
         {
-          backdrop && (
+          !!backdrop && (
             <div
               hidden={hidden}
               data-visible={value}
               onAnimationEnd={this._onAnimationEnd}
               className="webkit-sassui-backdrop react-modal-backdrop"
+              {...bakcdropProps}
             />
           )
         }

@@ -8,7 +8,10 @@
     className: PropTypes.string,
     value: PropTypes.bool,
     onChange: PropTypes.func,
-    backdrop: PropTypes.bool
+    backdrop: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.object
+    ])
   };
 
   static defaultProps = {
