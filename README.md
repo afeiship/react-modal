@@ -6,7 +6,7 @@
 
   static propTypes = {
     className: PropTypes.string,
-    visible: PropTypes.bool,
+    value: PropTypes.bool,
     onChange: PropTypes.func,
     backdrop: PropTypes.bool,
     backdropProps: PropTypes.object,
@@ -14,9 +14,8 @@
 
   static defaultProps = {
     className: '',
-    visible: false,
+    value: false,
     backdrop: true,
-    backdropProps: {},
     onChange: noop
   };
   

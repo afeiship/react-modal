@@ -3,6 +3,9 @@ html,body{
   height:100%;
   position: relative;
 }
+
+@import './components/style.scss';
+
 .hello-react-modal{
   color:#F00;
 

@@ -8,7 +8,7 @@ export default class extends React.Component {
   /*===properties start===*/
   static propTypes = {
     className: PropTypes.string,
-    visible: PropTypes.bool,
+    value: PropTypes.bool,
     onChange: PropTypes.func,
     backdrop: PropTypes.bool,
     backdropProps: PropTypes.object,
@@ -16,58 +16,57 @@ export default class extends React.Component {
 
   static defaultProps = {
     className: '',
-    visible: false,
+    value: false,
     backdrop: true,
-    backdropProps: {},
     onChange: noop
   };
   /*===properties end===*/
 
   constructor(inProps) {
+    const { value } = inProps;
     super(inProps);
-    const { visible } = inProps;
     this.state = {
-      visible,
-      hidden: !visible
+      value,
+      hidden: !value
     };
   }
 
   componentWillReceiveProps(inProps) {
-    const { visible } = inProps;
-    if (visible !== this.state.visible) {
-      if (visible) {
+    const { value } = inProps;
+    if (value !== this.state.value) {
+      if (value) {
         this.setState({ hidden: false })
       }
-      this.setState({ visible });
+      this.setState({ value });
     }
   }
 
   present() {
-    this.setState({ hidden: false, visible: true })
+    this.setState({ hidden: false, value: true })
   }
 
   dismiss() {
-    this.setState({ visible: false });
+    this.setState({ value: false });
   }
 
   _onAnimationEnd = () => {
-    const { visible } = this.state;
+    const { value } = this.state;
     const { onChange } = this.props;
-    if (!visible) {
+    if (!value) {
       this.setState({ hidden: true })
     }
-    onChange({ target: { value: visible }});
+    onChange({ target: { value } });
   };
 
   render() {
-    const { visible, className, backdrop, backdropProps, ...props } = this.props;
-    const { hidden } = this.state;
+    const { className, backdrop, backdropProps, ...props } = this.props;
+    const { value, hidden } = this.state;
 
     return (
       <Fragment>
         <div
           hidden={hidden}
-          data-visible={this.state.visible}
+          data-visible={value}
           onAnimationEnd={this._onAnimationEnd}
           className={classNames('webkit-sassui-modal react-modal', className)}
           {...props} />
@@ -76,10 +75,9 @@ export default class extends React.Component {
           backdrop && (
             <div
               hidden={hidden}
-              data-visible={this.state.visible}
+              data-visible={value}
               onAnimationEnd={this._onAnimationEnd}
               className="webkit-sassui-backdrop react-modal-backdrop"
-              {...backdropProps}
             />
           )
         }
