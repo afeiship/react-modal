@@ -41,12 +41,16 @@ class App extends React.Component {
     this.md.dismiss();
   };
 
+  _onChange = e =>{
+    console.log(e.target.value);
+  };
+
   render() {
     return (
       <div className="hello-react-modal">
         <button onClick={this.onShow}>ShowModel</button>
 
-        <ReactModal className="my-modal" ref={md => this.md = md}>
+        <ReactModal onChange={this._onChange} className="my-modal" ref={md => this.md = md}>
           <h1>I am the title</h1>
           <button onClick={this.onHide}>test modal</button>
         </ReactModal>

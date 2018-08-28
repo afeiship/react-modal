@@ -83,7 +83,6 @@ export default class extends React.Component {
             <div
               hidden={hidden}
               data-visible={value}
-              onAnimationEnd={this._onAnimationEnd}
               className="webkit-sassui-backdrop react-modal-backdrop"
               {...bakcdropProps}
             />
