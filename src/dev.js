@@ -8,7 +8,7 @@ import ReactModal from './main';
 
 class App extends React.Component {
   state = {
-    visible: false
+    value: false
   }
 
   onShow = e => {
