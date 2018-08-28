@@ -3,6 +3,7 @@ var webpack = require('webpack')
 var config = require('../config')
 var utils = require('./utils')
 var env = process.env.NODE_ENV;
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
   // check env & config/index.js to decide weither to enable CSS Sourcemaps for the
   // various preprocessor loaders added to vue-loader at the end of this file
@@ -40,6 +41,12 @@ module.exports = {
     }
   },
   plugins:[
+    new CopyWebpackPlugin([
+      {
+        from: './src/components/style.scss',
+        to: './style.scss',
+      }
+    ]),
     new webpack.ProvidePlugin({
         'React': 'react',
         'ReactDOM': 'react-dom'
