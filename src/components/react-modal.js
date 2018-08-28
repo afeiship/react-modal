@@ -2,12 +2,14 @@ import React, { Fragment, Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import noop from 'noop';
 
 export default class extends React.Component {
   /*===properties start===*/
   static propTypes = {
     className: PropTypes.string,
     visible: PropTypes.bool,
+    onChange: PropTypes.func,
     backdrop: PropTypes.bool,
     backdropProps: PropTypes.object,
   };
@@ -16,7 +18,8 @@ export default class extends React.Component {
     className: '',
     visible: false,
     backdrop: true,
-    backdropProps: {}
+    backdropProps: {},
+    onChange: noop
   };
   /*===properties end===*/
 
@@ -49,9 +52,11 @@ export default class extends React.Component {
 
   _onAnimationEnd = () => {
     const { visible } = this.state;
+    const { onChange } = this.props;
     if (!visible) {
       this.setState({ hidden: true })
     }
+    onChange({ target: { value: visible }});
   };
 
   render() {

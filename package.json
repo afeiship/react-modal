@@ -85,6 +85,7 @@
     "calc-matrix": "github:afeiship/calc-matrix",
     "classnames": "^2.2.5",
     "measure-it": "github:afeiship/measure-it",
+    "noop": "github:afeiship/noop",
     "object-assign": "^4.1.1",
     "prop-types": "^15.5.10",
     "react-append-to-document": "github:afeiship/react-append-to-document",
