@@ -1,5 +1,5 @@
 # react-modal
-> Modal components for react(alert/confirm &amp; the common modal components).
+> Modal components for react.
 
 ## properties:
 ```javascript

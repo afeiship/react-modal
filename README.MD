@@ -1,10 +1,5 @@
 # react-modal
-> Modal components for react(alert/confirm &amp; the common modal components).
-
-## size:
- + 16K	react-modal.js
- + 68K	react-modal.js.map
-
+> Modal components for react.
 
 ## properties:
 ```javascript
@@ -12,6 +7,7 @@
   static propTypes = {
     className: PropTypes.string,
     visible: PropTypes.bool,
+    onChange: PropTypes.func,
     backdrop: PropTypes.bool,
     backdropProps: PropTypes.object,
   };
@@ -20,7 +16,8 @@
     className: '',
     visible: false,
     backdrop: true,
-    backdropProps: {}
+    backdropProps: {},
+    onChange: noop
   };
   
 ```
@@ -59,9 +56,3 @@ class App extends React.Component {
 
 
 ```
-
-
-## todo:
-+ [x] remove theme properies
-+ [ ] refator body & children part.
-+ [ ] load image from out of GTW will not success.
