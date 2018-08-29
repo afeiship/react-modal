@@ -8,6 +8,7 @@
     className: PropTypes.string,
     value: PropTypes.bool,
     onChange: PropTypes.func,
+    destroyable: PropTypes.bool,
     backdrop: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.object
@@ -18,7 +19,8 @@
     className: '',
     value: false,
     onChange: noop,
-    backdrop: true
+    backdrop: true,
+    destroyable: false
   };
   
 ```
@@ -30,7 +32,11 @@
 
 class App extends React.Component {
   state = {
-    visible: false
+    value: false,
+  }
+
+  get title(){
+    return Math.random();
   }
 
   onShow = e => {
@@ -51,7 +57,7 @@ class App extends React.Component {
         <button onClick={this.onShow}>ShowModel</button>
 
         <ReactModal onChange={this._onChange} className="my-modal" ref={md => this.md = md}>
-          <h1>I am the title</h1>
+          <h1>I am the title {this.title}</h1>
           <button onClick={this.onHide}>test modal</button>
         </ReactModal>
       </div>
