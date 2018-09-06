@@ -1,22 +1,28 @@
-@import 'node_modules/webkit-sassui-backdrop/dist/webkit-sassui-backdrop.scss';
-@import 'node_modules/webkit-sassui-modal/dist/webkit-sassui-modal.scss';
+@import "node_modules/webkit-sassui-backdrop/dist/webkit-sassui-backdrop.scss";
+@import "node_modules/webkit-sassui-modal/dist/webkit-sassui-modal.scss";
 
-$react-modal-options:(
-    modal-z-index: 100,
-    backdrop-z-index: 98
-)!default;
+$react-modal-options: (
+  modal-z-index: 100,
+  backdrop-z-index: 98
+) !default;
 
-.react-modal{
-    $modal-z-index: map-get($map: $react-modal-options, $key: modal-z-index);
-    $backdrop-z-index: map-get($map: $react-modal-options, $key: backdrop-z-index);
+.react-modal {
+  $modal-z-index: map-get(
+    $map: $react-modal-options,
+    $key: modal-z-index
+  );
+  $backdrop-z-index: map-get(
+    $map: $react-modal-options,
+    $key: backdrop-z-index
+  );
 
-    &,
-    &-backdrop{
-        position: fixed;
-    }
+  &,
+  &-backdrop {
+    position: fixed;
+  }
 
-    z-index: $modal-z-index;
-    &-bakcdrop{
-        z-index:$backdrop-z-index;
-    }
+  z-index: $modal-z-index;
+  &-bakcdrop {
+    z-index: $backdrop-z-index;
+  }
 }
