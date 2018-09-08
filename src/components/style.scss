@@ -18,18 +18,20 @@ $react-modal-options: (
     $map: $z-index,
     $key: modal
   );
+
   $backdrop-z-index: map-get(
     $map: $z-index,
     $key: backdrop
   );
 
   &,
-  &-backdrop {
+  & + .webkit-sassui-backdrop{
     position: fixed;
   }
 
   z-index: $modal-z-index;
-  &-bakcdrop {
+  & + .webkit-sassui-backdrop {
+    position: fixed;
     z-index: $backdrop-z-index;
   }
 }

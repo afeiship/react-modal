@@ -38,7 +38,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="hello-react-modal">
-        <button onClick={this.onShow} style={{zIndex:10}}>ShowModel</button>
+        <button onClick={this.onShow} style={{position:'relative',zIndex:10}}>ShowModel</button>
         <ReactModal destroyable onChange={this._onChange} className="my-modal" ref={md => this.md = md}>
           <h1>I am the title {this.title}</h1>
           <ChildView/>
