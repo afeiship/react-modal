@@ -2,18 +2,25 @@
 @import "node_modules/webkit-sassui-modal/dist/webkit-sassui-modal.scss";
 
 $react-modal-options: (
-  modal-z-index: 100,
-  backdrop-z-index: 98
+  z-index: (
+    modal: 100,
+    backdrop: 98
+  )
 ) !default;
 
 .react-modal {
-  $modal-z-index: map-get(
+  $z-index: map-get(
     $map: $react-modal-options,
-    $key: modal-z-index
+    $key: z-index
+  );
+
+  $modal-z-index: map-get(
+    $map: $z-index,
+    $key: modal
   );
   $backdrop-z-index: map-get(
-    $map: $react-modal-options,
-    $key: backdrop-z-index
+    $map: $z-index,
+    $key: backdrop
   );
 
   &,
