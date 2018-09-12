@@ -15,7 +15,7 @@ export default class extends ReactVisible {
       <div
         hidden={hidden}
         data-visible={this.state.value}
-        onAnimationEnd={this.onAnimationEnd}
+        onAnimationEnd={this._onAnimationEnd}
         className={classNames('webkit-sassui-modal react-modal', className)}
         {...props}
       />
