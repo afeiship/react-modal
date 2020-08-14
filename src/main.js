@@ -1,3 +1,2 @@
-import ReactModal from 'components/react-modal';
-
-module.exports = ReactModal;
+import ReactModal from './components';
+export default ReactModal;
