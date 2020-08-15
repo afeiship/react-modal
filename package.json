@@ -1,6 +1,6 @@
 {
   "name": "@feizheng/react-modal",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Modal components for react.",
   "main": "dist/index.js",
   "scripts": {
@@ -48,7 +48,7 @@
     "@babel/register": "^7.9.0",
     "@feizheng/next-replace-in-file": "^1.0.1",
     "@feizheng/rake-git": "^1.2.1",
-    "@feizheng/react-markdown-props": "^1.2.1",
+    "@feizheng/react-markdown-props": "^1.2.3",
     "@feizheng/webpack-lib-kits": "^1.1.21",
     "@testing-library/react": "^10.0.1",
     "babel-loader": "^8.1.0",

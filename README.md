@@ -22,13 +22,8 @@ npm update @feizheng/react-modal
 | className   | string | false    | -       | The extended className for component.       |
 | value       | bool   | false    | -       | Abstract visible value.                     |
 | destroyable | bool   | false    | true    | If element destroyed when visible to false. |
-
-In modal case:
-
-1. set the value to true, you need not care z-index
-2. If only has one modal, you can set this to false.
-   onChange | func | false | noop | The change handler.
-   backdrop | union | false | - | Backdrop props or not display backdrop. |
+| onChange    | func   | false    | noop    | The change handler.                         |
+| backdrop    | union  | false    | -       | Backdrop props or not display backdrop.     |
 
 
 ## usage
