@@ -21,51 +21,45 @@ export default class ReactModal extends ReactVisible {
      */
     value: PropTypes.bool,
     /**
+     * If element destroyed when visible to false.
+     * In modal case:
+     * 1. set the value to true, you need not care z-index
+     * 2. If only has one modal, you can set this to false.
+     */
+    destroyable: PropTypes.bool,
+    /**
      * The change handler.
      */
     onChange: PropTypes.func,
-    /**
-     * If element destroyed when visible to false.
-     */
-    destroyable: PropTypes.bool,
     /**
      * Backdrop props or not display backdrop.
      */
     backdrop: PropTypes.oneOfType([
       PropTypes.bool,
-      PropTypes.object,
-    ]),
+      PropTypes.object
+    ])
   };
 
   static defaultProps = {
     onChange: noop,
-    destroyable: false
+    destroyable: true
   };
 
   get visibleElementView() {
-    const {
-      className,
-      destroyable,
-      value,
-      backdrop,
-      ...props
-    } = this.props;
+    const { className, value, backdrop, destroyable, ...props } = this.props;
 
     const { hidden } = this.state;
     return ReactDOM.createPortal(
-      [
+      <React.Fragment>
         <div
-          key="modal"
           hidden={hidden}
           data-visible={this.state.value}
           onAnimationEnd={this.handleAnimationEnd}
           className={classNames(`webkit-sassui-modal ${CLASS_NAME}`, className)}
           {...props}
-        />,
-        !!backdrop && (
-          <ReactBackdrop key="backdrop" value={value} {...backdrop} />
-        )
-      ],
+        />
+        {!!backdrop && <ReactBackdrop value={value} {...backdrop} />}
+      </React.Fragment>,
       document.body
     );
   }

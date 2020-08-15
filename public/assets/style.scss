@@ -40,10 +40,15 @@ body,
 }
 
 .react-modal {
-  border: 1px solid #eee;
+  border: 1px solid #cccccc;
   width: 60%;
   text-align: center;
-  background: #fff;
+  background: #f60;
+  color: #fff;
+
+  h1{
+    font-size: 18px;
+  }
 
   .bd {
     padding: 20px;
@@ -52,7 +57,7 @@ body,
       margin-bottom: 10px;
     }
     p {
-      color: #666;
+      color: #fff;
       margin: 10px auto;
     }
 

@@ -1,6 +1,6 @@
 {
   "name": "@feizheng/react-modal",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Modal components for react.",
   "main": "dist/index.js",
   "scripts": {
@@ -73,8 +73,8 @@
   },
   "dependencies": {
     "@feizheng/noop": "^1.0.0",
-    "@feizheng/react-backdrop": "^1.0.1",
-    "@feizheng/react-visible": "^1.0.1",
+    "@feizheng/react-backdrop": "^1.0.2",
+    "@feizheng/react-visible": "^1.0.2",
     "@feizheng/webkit-sassui-modal": "^1.0.0",
     "autoprefixer": "^9.7.4",
     "classnames": "^2.2.6",
