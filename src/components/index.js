@@ -12,25 +12,7 @@ export default class ReactModal extends ReactVisible {
   static displayName = CLASS_NAME;
   static version = '__VERSION__';
   static propTypes = {
-    /**
-     * The extended className for component.
-     */
-    className: PropTypes.string,
-    /**
-     * Abstract visible value.
-     */
-    value: PropTypes.bool,
-    /**
-     * If element destroyed when visible to false.
-     * In modal case:
-     * 1. set the value to true, you need not care z-index
-     * 2. If only has one modal, you can set this to false.
-     */
-    destroyable: PropTypes.bool,
-    /**
-     * The change handler.
-     */
-    onChange: PropTypes.func,
+    ...ReactVisible.propTypes,
     /**
      * Backdrop props or not display backdrop.
      */
@@ -41,26 +23,40 @@ export default class ReactModal extends ReactVisible {
   };
 
   static defaultProps = {
-    onChange: noop,
+    ...ReactVisible.defaultProps,
     destroyable: true
   };
 
-  get visibleElementView() {
-    const { className, value, backdrop, destroyable, ...props } = this.props;
+  componentDidMount() {
+    const rootClass = ReactVisible.VISIBLE_ROOT_CLASS;
+    this.root = document.querySelector(`.${rootClass}`) || document.createElement('div');
+    this.root.className = rootClass;
+    document.body.appendChild(this.root);
+  }
 
-    const { hidden } = this.state;
+  get visibleElementView() {
+    const {
+      className,
+      backdrop,
+      destroyable,
+      onDismiss,
+      onPresent,
+      ...props
+    } = this.props;
+    const { hidden, value } = this.state;
+
     return ReactDOM.createPortal(
       <React.Fragment>
         <div
           hidden={hidden}
-          data-visible={this.state.value}
+          data-visible={value}
           onAnimationEnd={this.handleAnimationEnd}
           className={classNames(`webkit-sassui-modal ${CLASS_NAME}`, className)}
           {...props}
         />
         {!!backdrop && <ReactBackdrop value={value} {...backdrop} />}
       </React.Fragment>,
-      document.body
+      this.root
     );
   }
 }
