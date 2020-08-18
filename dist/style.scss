@@ -14,10 +14,4 @@ $react-modal-options: (
   & + .webkit-sassui-backdrop{
     position: fixed;
   }
-
-  z-index: $modal-z-index;
-  & + .webkit-sassui-backdrop {
-    position: fixed;
-    z-index: $backdrop-z-index;
-  }
 }

@@ -24,15 +24,9 @@ export default class ReactModal extends ReactVisible {
 
   static defaultProps = {
     ...ReactVisible.defaultProps,
-    destroyable: true
+    destroyable: true,
+    rootable: true
   };
-
-  componentDidMount() {
-    const rootClass = ReactVisible.VISIBLE_ROOT_CLASS;
-    this.root = document.querySelector(`.${rootClass}`) || document.createElement('div');
-    this.root.className = rootClass;
-    document.body.appendChild(this.root);
-  }
 
   get visibleElementView() {
     const {
@@ -41,22 +35,26 @@ export default class ReactModal extends ReactVisible {
       destroyable,
       onDismiss,
       onPresent,
+      rootable,
       ...props
     } = this.props;
-    const { hidden, value } = this.state;
 
-    return ReactDOM.createPortal(
+    const { hidden, value } = this.state;
+    const element = (
+      <div
+        hidden={hidden}
+        data-visible={value}
+        onAnimationEnd={this.handleAnimationEnd}
+        className={classNames(`webkit-sassui-modal ${CLASS_NAME}`, className)}
+        {...props}
+      />
+    );
+
+    return (
       <React.Fragment>
-        <div
-          hidden={hidden}
-          data-visible={value}
-          onAnimationEnd={this.handleAnimationEnd}
-          className={classNames(`webkit-sassui-modal ${CLASS_NAME}`, className)}
-          {...props}
-        />
-        {!!backdrop && <ReactBackdrop value={value} {...backdrop} />}
-      </React.Fragment>,
-      this.root
+        {!!backdrop && <ReactBackdrop value={value} children={element} {...backdrop} />}
+        {!backdrop && element}
+      </React.Fragment>
     );
   }
 }
