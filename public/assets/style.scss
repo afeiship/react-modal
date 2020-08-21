@@ -17,6 +17,8 @@ body,
 .app-container {
   padding: 50px;
   box-sizing: border-box;
+  width: 800px;
+  margin: 0 auto;
 }
 
 .button {
@@ -42,6 +44,7 @@ body,
 .react-modal {
   border: 1px solid #cccccc;
   width: 60%;
+  max-width: 400px;;
   text-align: center;
   background: #f60;
   color: #fff;
