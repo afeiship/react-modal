@@ -33,13 +33,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    Controller.singleton(ReactModal, {
-      backdrop: {
-        onClick: () => {
-          ReactModal.dismiss();
-        }
-      }
+    this.modal = Controller.createInstance(ReactModal, {
+      backdrop: true
     });
+    console.log(this.modal);
   }
 
   toggleModal = (inKey) => {
@@ -109,16 +106,20 @@ class App extends React.Component {
         <button
           className="button"
           onClick={(e) => {
-            ReactModal.present(
-              () => {
-                console.log('present!');
-              },
-              {
-                children: (
-                  <div className="sample-container">{this.sampleContent}</div>
-                )
-              }
-            );
+            this.modal.toggle({
+              children: (
+                <div className="sample-container">
+                  {this.sampleContent}
+                  <button
+                    className="button"
+                    onClick={(e) => {
+                      this.modal.dismiss();
+                    }}>
+                    CloseMe
+                  </button>
+                </div>
+              )
+            });
             console.log('dynamic child');
           }}>
           Dyanmic modal child

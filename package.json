@@ -75,7 +75,7 @@
   "dependencies": {
     "@feizheng/noop": "^1.0.0",
     "@feizheng/react-backdrop": "^1.0.6",
-    "@feizheng/react-visible": "^1.0.11",
+    "@feizheng/react-visible": "^1.0.14",
     "@feizheng/webkit-sassui-modal": "^1.0.0",
     "autoprefixer": "^9.8.6",
     "classnames": "^2.2.6",

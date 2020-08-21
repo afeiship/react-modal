@@ -48,13 +48,7 @@ export default class ReactModal extends ReactVisible {
       </div>
     );
 
-    return (
-      <React.Fragment>
-        {!!backdrop && (
-          <ReactBackdrop value={value} children={element} {...backdrop} />
-        )}
-        {!backdrop && element}
-      </React.Fragment>
-    );
+    if (!backdrop) return element;
+    return <ReactBackdrop value={value} children={element} {...backdrop} />;
   }
 }
