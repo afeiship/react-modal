@@ -16,10 +16,7 @@ export default class ReactModal extends ReactVisible {
     /**
      * Backdrop props or not display backdrop.
      */
-    backdrop: PropTypes.oneOfType([
-      PropTypes.bool,
-      PropTypes.object
-    ])
+    backdrop: PropTypes.oneOfType([PropTypes.bool, PropTypes.object])
   };
 
   static defaultProps = {
@@ -39,20 +36,23 @@ export default class ReactModal extends ReactVisible {
       ...props
     } = this.props;
 
-    const { hidden, value } = this.state;
+    const { hidden, value, children } = this.state;
     const element = (
       <div
         hidden={hidden}
         data-visible={value}
         onAnimationEnd={this.handleAnimationEnd}
         className={classNames(`webkit-sassui-modal ${CLASS_NAME}`, className)}
-        {...props}
-      />
+        {...props}>
+        {children}
+      </div>
     );
 
     return (
       <React.Fragment>
-        {!!backdrop && <ReactBackdrop value={value} children={element} {...backdrop} />}
+        {!!backdrop && (
+          <ReactBackdrop value={value} children={element} {...backdrop} />
+        )}
         {!backdrop && element}
       </React.Fragment>
     );

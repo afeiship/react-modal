@@ -1,6 +1,8 @@
+import { Controller } from '@feizheng/react-visible';
 import ReactModal from '../src/main';
 import ReactDOM from 'react-dom';
 import React from 'react';
+import '@feizheng/next-sample';
 import './assets/style.scss';
 
 class App extends React.Component {
@@ -9,6 +11,37 @@ class App extends React.Component {
     value2: false
   };
 
+  get sampleContent() {
+    const contents = [
+      <div>
+        <h1>Modal 1</h1>
+        <p>Content 1</p>
+        <img src="http://avatar.chsword.net/avatar/1" />
+      </div>,
+      <div>
+        <h2>Modal 2</h2>
+        <p>Content 2</p>
+        <img src="http://avatar.chsword.net/avatar/2" />
+      </div>,
+      <div>
+        <h3>Modal 3</h3>
+        <p>Content 3</p>
+        <img src="http://avatar.chsword.net/avatar/3" />
+      </div>
+    ];
+    return nx.sample(contents);
+  }
+
+  componentDidMount() {
+    Controller.singleton(ReactModal, {
+      backdrop: {
+        onClick: () => {
+          ReactModal.dismiss();
+        }
+      }
+    });
+  }
+
   toggleModal = (inKey) => {
     this.setState({ [inKey]: !this.state[inKey] });
   };
@@ -16,6 +49,23 @@ class App extends React.Component {
   render() {
     return (
       <div className="app-container">
+        <ReactModal value={this.state.value2}>
+          <div className="bd">
+            <h1>道可道，非常道 - no backdrop</h1>
+            <p>
+              天下皆知美之为美，斯恶已，皆知善之为善，斯不善已。
+              故有无相生，难易相成，长短相形，高下相倾，音声相和，前后相随。
+              是以圣人处无为之事，行不言之教，万物作焉而不辞，生而不有，为而不恃，功成而弗居。
+              夫惟弗居，是以不去。
+            </p>
+            <img src="https://himg.bdimg.com/sys/portrait/item/be10475f686d6c73db00.jpg" />
+            <button
+              className="button"
+              onClick={this.toggleModal.bind(this, 'value2')}>
+              可以关掉我
+            </button>
+          </div>
+        </ReactModal>
         <ReactModal
           value={this.state.value1}
           backdrop={{
@@ -40,38 +90,38 @@ class App extends React.Component {
           </div>
         </ReactModal>
 
-        <ReactModal value={this.state.value2}>
-          <div className="bd">
-            <h1>道可道，非常道 - no backdrop</h1>
-            <p>
-              天下皆知美之为美，斯恶已，皆知善之为善，斯不善已。
-              故有无相生，难易相成，长短相形，高下相倾，音声相和，前后相随。
-              是以圣人处无为之事，行不言之教，万物作焉而不辞，生而不有，为而不恃，功成而弗居。
-              夫惟弗居，是以不去。
-            </p>
-            <img src="https://himg.bdimg.com/sys/portrait/item/be10475f686d6c73db00.jpg" />
-            <button
-              className="button"
-              onClick={this.toggleModal.bind(this, 'value2')}>
-              可以关掉我
-            </button>
-          </div>
-        </ReactModal>
+        <button
+          className="button"
+          onClick={(e) => {
+            this.setState({ value2: !this.state.value2 });
+          }}>
+          Modal1
+        </button>
 
         <button
           className="button"
           onClick={(e) => {
             this.setState({ value1: !this.state.value1 });
           }}>
-          Toggle1
+          Modal2
         </button>
 
         <button
           className="button"
           onClick={(e) => {
-            this.setState({ value2: !this.state.value2 });
+            ReactModal.present(
+              () => {
+                console.log('present!');
+              },
+              {
+                children: (
+                  <div className="sample-container">{this.sampleContent}</div>
+                )
+              }
+            );
+            console.log('dynamic child');
           }}>
-          Toggle2
+          Dyanmic modal child
         </button>
       </div>
     );
