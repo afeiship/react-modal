@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import noop from '@feizheng/noop';
 import ReactVisible from '@feizheng/react-visible';
 import ReactBackdrop from '@feizheng/react-backdrop';
 
@@ -39,6 +37,7 @@ export default class ReactModal extends ReactVisible {
     const { hidden, value, children } = this.state;
     const element = (
       <div
+        onClick={(e) => e.stopPropagation()}
         hidden={hidden}
         data-visible={value}
         onAnimationEnd={this.handleAnimationEnd}
