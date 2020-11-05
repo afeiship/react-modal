@@ -1,6 +1,6 @@
 {
   "name": "@feizheng/react-modal",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Modal components for react.",
   "main": "dist/index.js",
   "scripts": {
@@ -18,7 +18,14 @@
   },
   "keywords": [
     "react",
-    "component"
+    "modal",
+    "dialog",
+    "component",
+    "components",
+    "ui",
+    "pc",
+    "web",
+    "popup"
   ],
   "author": "afei",
   "license": "MIT",
