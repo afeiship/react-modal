@@ -1,0 +1,5 @@
+.react-modal {
+  color: red;
+  font-size: 12px; }
+  .react-modal:active {
+    color: black; }

@@ -1,17 +1,10 @@
-$react-modal-options: (
-  z-index: (
-    modal: 100,
-    backdrop: 98
-  )
-) !default;
+$react-modal-options: () !default;
 
 .react-modal {
-  $z-index: map-get( $map: $react-modal-options, $key: z-index );
-  $modal-z-index: map-get( $map: $z-index, $key: modal );
-  $backdrop-z-index: map-get( $map: $z-index, $key: backdrop );
-
-  &,
-  & + .webkit-sassui-backdrop{
-    position: fixed;
+  // your styles
+  color: red;
+  font-size: 12px;
+  &:active {
+    color: black;
   }
 }

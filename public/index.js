@@ -1,9 +1,11 @@
-import { Controller } from '@feizheng/react-visible';
-import ReactModal from '../src/main';
-import ReactDOM from 'react-dom';
+import ReactDemokit from '@jswork/react-demokit';
 import React from 'react';
-import '@feizheng/next-sample';
+import ReactDOM from 'react-dom';
+import ReactModal from '../src/main';
+import { Controller } from '@jswork/react-visible';
 import './assets/style.scss';
+
+import '@jswork/next-sample';
 
 class App extends React.Component {
   state = {
@@ -16,17 +18,17 @@ class App extends React.Component {
       <div>
         <h1>Modal 1</h1>
         <p>Content 1</p>
-        <img src="http://avatar.chsword.net/avatar/1" />
+        <img src="https://randomuser.me/api/portraits/women/31.jpg" />
       </div>,
       <div>
         <h2>Modal 2</h2>
         <p>Content 2</p>
-        <img src="http://avatar.chsword.net/avatar/2" />
+        <img src="https://randomuser.me/api/portraits/women/32.jpg" />
       </div>,
       <div>
         <h3>Modal 3</h3>
         <p>Content 3</p>
-        <img src="http://avatar.chsword.net/avatar/3" />
+        <img src="https://randomuser.me/api/portraits/women/33.jpg" />
       </div>
     ];
     return nx.sample(contents);
@@ -45,7 +47,9 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="app-container">
+      <ReactDemokit
+        className="p-3 app-container"
+        url="https://github.com/afeiship/react-modal">
         <ReactModal value={this.state.value2}>
           <div className="bd">
             <h1>道可道，非常道 - no backdrop</h1>
@@ -57,7 +61,7 @@ class App extends React.Component {
             </p>
             <img src="https://himg.bdimg.com/sys/portrait/item/be10475f686d6c73db00.jpg" />
             <button
-              className="button"
+              className="button is-default is-fullwidth"
               onClick={this.toggleModal.bind(this, 'value2')}>
               可以关掉我
             </button>
@@ -80,7 +84,7 @@ class App extends React.Component {
               width="60%"
             />
             <button
-              className="button"
+              className="button is-primary is-fullwidth"
               onClick={this.toggleModal.bind(this, 'value1')}>
               学到啦！
             </button>
@@ -88,7 +92,7 @@ class App extends React.Component {
         </ReactModal>
 
         <button
-          className="button"
+          className="button is-primary is-fullwidth"
           onClick={(e) => {
             this.setState({ value2: !this.state.value2 });
           }}>
@@ -96,7 +100,7 @@ class App extends React.Component {
         </button>
 
         <button
-          className="button"
+          className="button my-2 is-primary is-fullwidth"
           onClick={(e) => {
             this.setState({ value1: !this.state.value1 });
           }}>
@@ -104,14 +108,14 @@ class App extends React.Component {
         </button>
 
         <button
-          className="button"
+          className="button is-fullwidth is-primary"
           onClick={(e) => {
             this.modal.toggle({
               children: (
                 <div className="sample-container">
                   {this.sampleContent}
                   <button
-                    className="button"
+                    className="button is-primary"
                     onClick={(e) => {
                       this.modal.dismiss();
                     }}>
@@ -124,7 +128,7 @@ class App extends React.Component {
           }}>
           Dyanmic modal child
         </button>
-      </div>
+      </ReactDemokit>
     );
   }
 }
