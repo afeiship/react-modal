@@ -24,14 +24,14 @@ npm install -S @jswork/react-modal
 ## usage
 1. import css
   ```scss
-  @import "~@feizheng/react-modal/dist/style.scss";
+  @import "~@jswork/react-modal/dist/style.scss";
 
   // customize your styles:
   $react-modal-options: ()
   ```
 2. import js
   ```js
-  import ReactModal from '@feizheng/react-modal';
+  import ReactModal from '@jswork/react-modal';
   import ReactDOM from 'react-dom';
   import React from 'react';
   import './assets/style.scss';
